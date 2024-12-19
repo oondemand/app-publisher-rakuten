@@ -1,12 +1,8 @@
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-  DialogFooter,
-  DialogClose,
 } from "@/components/ui/dialog";
 
 import {
@@ -24,10 +20,9 @@ import { Badge } from "@/components/ui/badge";
 import { CircleCheckBig, RefreshCcw, Clock } from "lucide-react";
 import { formatBRL } from "../../utils/currency";
 import { addTotalValueOfServices } from "./index";
+import { formatCompetence } from "../../utils/date";
 
 export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
-  console.log(ticket);
-
   return (
     <Dialog
       open={open}
@@ -67,7 +62,7 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                 ) && (
                   <Badge className="rounded-2xl bg-orange-200 text-orange-500 hover:bg-orange-300 flex gap-2 items-center">
                     <RefreshCcw size={14} />
-                    {/* Processando */}
+                    Processando
                   </Badge>
                 )}
             </span>
@@ -92,10 +87,18 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow>
-                  <TableCell>30/12</TableCell>
-                  <TableCell>R$ 15,00</TableCell>
-                </TableRow>
+                {ticket &&
+                  ticket?.servicos.map((servico) => (
+                    <TableRow>
+                      <TableCell>
+                        {formatCompetence({
+                          month: servico.mesCompetencia,
+                          year: servico.anoCompetencia,
+                        })}
+                      </TableCell>
+                      <TableCell>{formatBRL(servico.valorTotal)}</TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
             <Button className="w-full bg-sky-500 hover:bg-sky-700 font-semibold">

@@ -11,6 +11,11 @@ export const AuthLayout = () => {
         <div className="max-w-[390px] px-1">
           <Outlet />
         </div>
+        <div className="bg-brand-800 absolute bottom-0 w-full text-center py-3">
+          <span className="text-white font-bold text-base">
+            © Rakuten Advertising LLC
+          </span>
+        </div>
       </div>
     );
   }

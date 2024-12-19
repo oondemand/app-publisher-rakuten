@@ -8,7 +8,7 @@ export const AuthLayout = () => {
   if (user && !isLoading && user.tipo === "prestador") {
     return (
       <div className="w-screen h-screen bg-brand-25 flex justify-center">
-        <div className="max-w-[390px] px-1">
+        <div className="max-w-[390px] relative overflow-hidden px-1">
           <Outlet />
         </div>
         <div className="bg-brand-800 absolute bottom-0 w-full text-center py-3">

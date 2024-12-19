@@ -22,7 +22,31 @@ import { formatBRL } from "../../utils/currency";
 import { addTotalValueOfServices } from "./index";
 import { formatCompetence } from "../../utils/date";
 
+import JSZip from "jszip";
+import { format } from "date-fns";
+import { saveAs } from "file-saver";
+
 export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
+  const handleDownloadRpa = async () => {
+    const rpas = ticket.arquivos.filter((file) => file.tipo === "rpa");
+
+    if (rpas.length > 1) {
+      const zip = new JSZip();
+      rpas.forEach((file) => {
+        zip.file(file.nomeOriginal, file.data);
+      });
+      zip.generateAsync({ type: "blob" }).then(function (content) {
+        saveAs(content, `rpas-${format(new Date(), "dd-MM-yyy")}.zip`);
+      });
+      return;
+    }
+
+    const rpa = rpas[0];
+    const byteArray = new Uint8Array(rpa.buffer.data);
+    const blob = new Blob([byteArray], { type: rpa.mimetype });
+    saveAs(blob, rpa.nomeOriginal);
+  };
+
   return (
     <Dialog
       open={open}
@@ -89,7 +113,7 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
               <TableBody>
                 {ticket &&
                   ticket?.servicos.map((servico) => (
-                    <TableRow>
+                    <TableRow key={servico._id}>
                       <TableCell>
                         {formatCompetence({
                           month: servico.mesCompetencia,
@@ -101,9 +125,14 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                   ))}
               </TableBody>
             </Table>
-            <Button className="w-full bg-sky-500 hover:bg-sky-700 font-semibold">
-              Baixar Rpa
-            </Button>
+            {ticket?.arquivos.length > 0 && (
+              <Button
+                onClick={handleDownloadRpa}
+                className="w-full bg-sky-500 hover:bg-sky-700 font-semibold"
+              >
+                Baixar Rpa
+              </Button>
+            )}
           </div>
         </div>
       </DialogContent>

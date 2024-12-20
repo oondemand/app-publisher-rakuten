@@ -125,14 +125,15 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                   ))}
               </TableBody>
             </Table>
-            {ticket?.arquivos.length > 0 && (
-              <Button
-                onClick={handleDownloadRpa}
-                className="w-full bg-sky-500 hover:bg-sky-700 font-semibold"
-              >
-                Baixar Rpa
-              </Button>
-            )}
+            {ticket?.arquivos.length > 0 &&
+              ticket.arquivos.some((file) => file.tipo === "rpa") && (
+                <Button
+                  onClick={handleDownloadRpa}
+                  className="w-full bg-sky-500 hover:bg-sky-700 font-semibold"
+                >
+                  Baixar Rpa
+                </Button>
+              )}
           </div>
         </div>
       </DialogContent>

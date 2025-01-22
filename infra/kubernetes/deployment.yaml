@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-rakuten-frontend
+  namespace: rakuten
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-rakuten-frontend
+  template:
+    metadata:
+      labels:
+        app: app-rakuten-frontend
+    spec:
+      containers:
+        - name: app-rakuten-frontend-container
+          image: ghcr.io/oondemand/app-publisher-rakuten:${IMAGE_TAG}-prod
+          ports:
+            - containerPort: 3001
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "0.5"
+            limits:
+              memory: "4096Mi"
+              cpu: "3"

@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-rakuten-frontend-ingress
+  namespace: rakuten
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-nginx
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - app.rakuten.segeti.oondemand.com.br
+      secretName: app-tls
+  rules:
+    - host: app.rakuten.segeti.oondemand.com.br
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app-rakuten-frontend-service
+                port:
+                  number: 80

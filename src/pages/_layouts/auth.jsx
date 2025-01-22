@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
 import { Navigate } from "react-router-dom";
+import { env } from "../../config/env";
 
 export const AuthLayout = () => {
   const { user, isLoading } = useAuth();
@@ -13,7 +14,7 @@ export const AuthLayout = () => {
         </div>
         <div className="bg-brand-800 absolute bottom-0 w-full text-center py-3">
           <span className="text-white font-bold text-base">
-            © Rakuten Advertising LLC - v0.1.0
+            © App Publisher - v{env.SERVICE_VERSION}
           </span>
         </div>
       </div>

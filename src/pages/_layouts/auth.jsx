@@ -14,7 +14,7 @@ export const AuthLayout = () => {
         </div>
         <div className="bg-brand-800 absolute bottom-0 w-full text-center py-3">
           <span className="text-white font-bold text-base">
-            © App Publisher - v{env.SERVICE_VERSION}
+            © App Publisher - v{env.VITE_SERVICE_VERSION}
           </span>
         </div>
       </div>

@@ -40,7 +40,7 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
       zip.generateAsync({ type: "blob" }).then(function (content) {
         saveAs(
           content,
-          `arquivos-${ticket?.titulo}-${format(new Date(), "dd-MM-yyy")}.zip`
+          `arquivos-${format(new Date(), "dd-MM-yyy")}.zip`
         );
       });
       return;

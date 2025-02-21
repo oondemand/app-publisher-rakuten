@@ -18,15 +18,17 @@ import { Button } from "@/components/ui/button";
 
 import { Badge } from "@/components/ui/badge";
 import { CircleCheckBig, RefreshCcw, Clock } from "lucide-react";
-import { formatBRL } from "../../utils/currency";
+import { formatCurrency } from "../../utils/currency";
 import { addTotalValueOfServices } from "./index";
 import { formatCompetence } from "../../utils/date";
 
 import JSZip from "jszip";
 import { format } from "date-fns";
 import { saveAs } from "file-saver";
+import { useTranslation } from "react-i18next";
 
 export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
+  const { t } = useTranslation();
   const handleDownloadRpa = async () => {
     const rpas = ticket.arquivos.filter((file) => file.tipo === "rpa");
 
@@ -61,23 +63,23 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
         <div className="bg-white rounded-lg p-4">
           <DialogHeader className="text-left">
             <DialogTitle className="text-base border-b text-brand-500">
-              Detalhe do Ticket
+              {t("home.ticketDetails.dialog.title")}
             </DialogTitle>
           </DialogHeader>
           <div className="pb-3" />
           <div className="flex flex-col gap-2">
             <span className="flex gap-4 font-semibold text-zinc-600">
-              Status{" "}
+              {t("home.ticketDetails.dialog.status.label")}{" "}
               {ticket &&
                 ticket.status === "concluido" &&
                 ticket.etapa === "concluido" && (
                   <Badge className="rounded-2xl  bg-emerald-100 text-green-500 hover:bg-emerald-200 flex gap-2 items-center">
-                    <CircleCheckBig size={14} /> Pago
+                    <CircleCheckBig size={14} /> {t("home.badge.pago")}
                   </Badge>
                 )}
               {ticket && ticket?.etapa === "integracao-omie" && (
                 <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
-                  <Clock size={14} /> Pendente
+                  <Clock size={14} /> {t("home.badge.pendente")}
                 </Badge>
               )}
               {ticket &&
@@ -86,27 +88,29 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                 ) && (
                   <Badge className="rounded-2xl bg-orange-200 text-orange-500 hover:bg-orange-300 flex gap-2 items-center">
                     <RefreshCcw size={14} />
-                    Processando
+                    {t("home.badge.processando")}
                   </Badge>
                 )}
             </span>
             <span className="flex gap-4 font-semibold text-zinc-600">
-              Valor total:{" "}
+              {t("home.ticketDetails.dialog.valorTotal.label")}{" "}
               <p className="font-normal">
-                {formatBRL(addTotalValueOfServices(ticket?.servicos ?? []))}
+                {formatCurrency(
+                  addTotalValueOfServices(ticket?.servicos ?? [])
+                )}
               </p>
             </span>
             <span className="flex gap-4 font-semibold text-zinc-600">
-              Detalhamento das comissões:
+              {t("home.ticketDetails.dialog.comissoes.label")}
             </span>
             <Table>
               <TableHeader>
                 <TableRow className="bg-brand-500 text-white rounded-t-md hover:bg-brand-500">
                   <TableHead className="rounded-tl-md text-white font-bold p-2 h-0">
-                    Competência
+                    {t("home.ticketDetails.table.head.label.competencia")}
                   </TableHead>
                   <TableHead className="rounded-tr-md text-white font-bold p-2 h-0">
-                    Valor
+                    {t("home.ticketDetails.table.head.label.valor")}
                   </TableHead>
                 </TableRow>
               </TableHeader>
@@ -120,7 +124,9 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                           year: servico.anoCompetencia,
                         })}
                       </TableCell>
-                      <TableCell>{formatBRL(servico.valorTotal)}</TableCell>
+                      <TableCell>
+                        {formatCurrency(servico.valorTotal)}
+                      </TableCell>
                     </TableRow>
                   ))}
               </TableBody>
@@ -131,7 +137,7 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                   onClick={handleDownloadRpa}
                   className="w-full bg-sky-500 hover:bg-sky-700 font-semibold"
                 >
-                  Baixar Rpa
+                  {t("home.ticketDetails.dialog.button.baixarRpa")}
                 </Button>
               )}
           </div>

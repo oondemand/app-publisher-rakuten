@@ -17,15 +17,20 @@ import { LoginService } from "../../services/auth";
 
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
+import { useTranslation } from "react-i18next";
 
 const FormSchema = z.object({
-  email: z.string({ message: "Email é obrigatório" }).email("Email inválido!"),
+  email: z
+    .string({ message: "login.validation.form.email.error.required" })
+    .email("login.validation.form.email.error.invalid"),
   senha: z
-    .string({ message: "Senha é obrigatória" })
-    .min(6, { message: "A senha precisa ter pelo menos 6 dígitos!" }),
+    .string({ message: "login.validation.form.senha.error.required" })
+    .min(6, { message: "login.validation.form.senha.error.min" }),
 });
 
 export const LoginForm = () => {
+  const { t } = useTranslation();
+
   const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -45,13 +50,17 @@ export const LoginForm = () => {
         return navigate("/");
       }
 
-      toast.error("Sem permissões para acessar o app publisher!", {
-        description: "Verifique suas permissões com um administrador.",
+      toast.error(t("login.common.form.toast.login.permission.error.message"), {
+        description: t(
+          "login.common.form.toast.login.permission.error.description"
+        ),
       });
     },
     onError: (error) =>
-      toast.error("Erro ao fazer login", {
-        description: error?.message || "",
+      toast.error(t("login.common.form.toast.login.unexpected.error.message"), {
+        description: t(
+          "login.common.form.toast.login.unexpected.error.description"
+        ),
       }),
   });
 
@@ -63,11 +72,13 @@ export const LoginForm = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-brand-500">Seu email *</FormLabel>
+              <FormLabel className="text-brand-500">
+                {t("login.form.email.label")} *
+              </FormLabel>
               <FormControl>
                 <Input
                   className="focus-visible:ring-brand-350"
-                  placeholder="Seu email"
+                  placeholder={t("login.form.email.placeholder")}
                   {...field}
                 />
               </FormControl>
@@ -80,12 +91,14 @@ export const LoginForm = () => {
           name="senha"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-brand-500">Sua senha *</FormLabel>
+              <FormLabel className="text-brand-500">
+                {t("login.form.senha.label")} *
+              </FormLabel>
               <FormControl>
                 <Input
                   className="focus-visible:ring-brand-350"
                   type="password"
-                  placeholder="Sua senha"
+                  placeholder={t("login.form.senha.placeholder")}
                   {...field}
                 />
               </FormControl>
@@ -97,7 +110,7 @@ export const LoginForm = () => {
           className="w-full font-semibold bg-sky-500 hover:bg-sky-600"
           type="submit"
         >
-          Submit
+          {t("login.form.button.submit")}
         </Button>
       </form>
     </Form>

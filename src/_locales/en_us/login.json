@@ -1,0 +1,36 @@
+{
+  "header.logo.description": "Central Publisher",
+  "header.title": "We're glad you're here :)",
+  "header.description": "Let's transform your routine with technology together.",
+
+  "form.email.label": "Your email",
+  "form.email.placeholder": "Your email",
+  "form.senha.label": "Your password",
+  "form.senha.placeholder": "Your password",
+  "form.button.submit": "Send",
+  "footer.link": "Forgot your password?",
+
+  "dialog.title": "Reset Password",
+  "dialog.description": "Enter the email associated with your account. You'll receive a link to reset your password.",
+
+  "dialog.form.email.label": "Your email",
+  "dialog.form.email.placeholder": "Your email",
+  "dialog.form.button.submit": "Send",
+
+  "validation.form.email.error.required": "Email is required",
+  "validation.form.email.error.invalid": "Invalid email!",
+  "validation.form.senha.error.required": "Password is required",
+  "validation.form.senha.error.min": "Password must be at least 6 characters!",
+  "validation.dialog.form.email.error.required": "Email is required",
+  "validation.dialog.form.email.error.invalid": "Invalid email!",
+
+  "common.form.toast.login.permission.error.message": "You don’t have permission to access the publisher app!",
+  "common.form.toast.login.permission.error.description": "Please check with an administrator about your permissions.",
+  "common.form.toast.login.unexpected.error.message": "Error logging in",
+  "common.form.toast.login.unexpected.error.description": "An unexpected error occurred while logging in!",
+
+  "dialog.common.toast.success": "Check your email.",
+  "dialog.common.toast.success.description": "We've sent you a link to reset your password.",
+  "dialog.common.toast.error": "There was an error resetting your password",
+  "dialog.common.toast.error.description": "An unexpected error occurred while trying to reset your password."
+}

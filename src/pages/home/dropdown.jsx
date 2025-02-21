@@ -9,9 +9,11 @@ import { DoorOpen, UserRound } from "lucide-react";
 import { ResetPasswordDialog } from "./dialog";
 
 import { useAuth } from "../../hooks/auth";
+import { useTranslation } from "react-i18next";
 
 export const Dropdown = () => {
   const { logout } = useAuth();
+  const { t } = useTranslation();
 
   return (
     <DropdownMenu>
@@ -32,7 +34,7 @@ export const Dropdown = () => {
             onClick={logout}
             className="flex outline-none text-brand-500 hover:bg-zinc-100 justify-between w-full items-center gap-2 rounded-sm text-sm transition-colors [&>svg]:size-4"
           >
-            Logout <DoorOpen />
+            {t("home.dropdown.logout")} <DoorOpen />
           </button>
         </DropdownMenuItem>
       </DropdownMenuContent>

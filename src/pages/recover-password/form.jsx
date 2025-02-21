@@ -17,22 +17,26 @@ import { LoginService } from "../../services/auth";
 
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
+import { useTranslation } from "react-i18next";
 
 const FormSchema = z
   .object({
     novaSenha: z
-      .string({ message: "Senha é obrigatória" })
-      .min(6, { message: "A nova senha precisa ter pelo menos 6 dígitos!" }),
+      .string({ message: "recoverPassword.validation.newPassword.required" })
+      .min(6, { message: "recoverPassword.validation.newPassword.min" }),
     confirmacao: z
-      .string({ message: "Confirmação é obrigatória" })
-      .min(6, { message: "A confirmação precisa ter pelo menos 6 dígitos!" }),
+      .string({
+        message: "recoverPassword.validation.confirmPassword.required",
+      })
+      .min(6, { message: "recoverPassword.validation.confirmPassword.min" }),
   })
   .refine((data) => data.novaSenha === data.confirmacao, {
-    message: "A senha e a confirmação precisam ser iguais!",
+    message: "recoverPassword.validation.confirmPassword.notMatch",
     path: ["confirmacao"],
   });
 
 export const RecoverPasswordForm = () => {
+  const { t } = useTranslation();
   const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -48,17 +52,17 @@ export const RecoverPasswordForm = () => {
     mutationFn: LoginService.createNewPassword,
     onSuccess: ({ token, usuario }) => {
       if (usuario.tipo === "prestador") {
-        toast.success("Senha atualizada com sucesso!");
+        toast.success(t("recoverPassword.toast.success.message"));
         login(token, usuario);
         return navigate("/");
       }
 
-      toast.error("Sem permissões para acessar o app publisher!", {
-        description: "Verifique suas permissões com um administrador.",
+      toast.error(t("recoverPassword.toast.permission.error.message"), {
+        description: t("recoverPassword.toast.permission.error.description"),
       });
     },
     onError: (error) => {
-      toast.error("Ouve um erro ao atualizar senha!");
+      toast.error(t("recoverPassword.toast.unexpected.error.message"));
     },
   });
 
@@ -73,12 +77,16 @@ export const RecoverPasswordForm = () => {
           name="novaSenha"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-brand-500">Nova senha *</FormLabel>
+              <FormLabel className="text-brand-500">
+                {t("recoverPassword.form.newPassword.label")} *
+              </FormLabel>
               <FormControl>
                 <Input
                   className="focus-visible:ring-brand-350"
                   type="password"
-                  placeholder="Sua senha"
+                  placeholder={t(
+                    "recoverPassword.form.newPassword.placeholder"
+                  )}
                   {...field}
                 />
               </FormControl>
@@ -92,13 +100,15 @@ export const RecoverPasswordForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-brand-500">
-                Confirme sua nova senha *
+                {t("recoverPassword.form.confirmPassword.label")} *
               </FormLabel>
               <FormControl>
                 <Input
                   className="focus-visible:ring-brand-350"
                   type="password"
-                  placeholder="Sua senha"
+                  placeholder={t(
+                    "recoverPassword.form.confirmPassword.placeholder"
+                  )}
                   {...field}
                 />
               </FormControl>
@@ -110,7 +120,7 @@ export const RecoverPasswordForm = () => {
           className="w-full font-semibold bg-sky-500 hover:bg-sky-600"
           type="submit"
         >
-          Submit
+          {t("recoverPassword.form.button.submit")}
         </Button>
       </form>
     </Form>

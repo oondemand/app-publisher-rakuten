@@ -29,24 +29,27 @@ import { useTranslation } from "react-i18next";
 
 export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
   const { t } = useTranslation();
-  const handleDownloadRpa = async () => {
-    const rpas = ticket.arquivos.filter((file) => file.tipo === "rpa");
+  const handleDownloadArquivos = async () => {
+    const arquivos = ticket.arquivos;
 
-    if (rpas.length > 1) {
+    if (arquivos.length > 1) {
       const zip = new JSZip();
-      rpas.forEach((file) => {
+      arquivos.forEach((file) => {
         zip.file(file.nomeOriginal, file.data);
       });
       zip.generateAsync({ type: "blob" }).then(function (content) {
-        saveAs(content, `rpas-${format(new Date(), "dd-MM-yyy")}.zip`);
+        saveAs(
+          content,
+          `arquivos-${ticket?.titulo}-${format(new Date(), "dd-MM-yyy")}.zip`
+        );
       });
       return;
     }
 
-    const rpa = rpas[0];
-    const byteArray = new Uint8Array(rpa.buffer.data);
-    const blob = new Blob([byteArray], { type: rpa.mimetype });
-    saveAs(blob, rpa.nomeOriginal);
+    const arquivo = arquivos[0];
+    const byteArray = new Uint8Array(arquivo.buffer.data);
+    const blob = new Blob([byteArray], { type: arquivo.mimetype });
+    saveAs(blob, arquivo.nomeOriginal);
   };
 
   return (
@@ -131,15 +134,14 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                   ))}
               </TableBody>
             </Table>
-            {ticket?.arquivos.length > 0 &&
-              ticket.arquivos.some((file) => file.tipo === "rpa") && (
-                <Button
-                  onClick={handleDownloadRpa}
-                  className="w-full bg-sky-500 hover:bg-sky-700 font-semibold"
-                >
-                  {t("home.ticketDetails.dialog.button.baixarRpa")}
-                </Button>
-              )}
+            {ticket?.arquivos.length > 0 && (
+              <Button
+                onClick={handleDownloadArquivos}
+                className="w-full bg-sky-500 hover:bg-sky-700 font-semibold"
+              >
+                {t("home.ticketDetails.dialog.button.arquivo")}
+              </Button>
+            )}
           </div>
         </div>
       </DialogContent>

@@ -10,18 +10,29 @@ import enUsRecoverPassword from "../_locales/en_us/recoverPassword.json";
 import enUsHome from "../_locales/en_us/home.json";
 import ptBrHome from "../_locales/pt_br/home.json";
 
+function loadInitialLanguage() {
+  const localStorageLang = localStorage.getItem("@app-publisher-language");
+
+  if (localStorageLang) {
+    return localStorageLang;
+  }
+
+  const browserLang = navigator.language;
+  return browserLang;
+}
+
 i18n.use(initReactI18next).init({
-  lng: "pt_br",
-  fallbacklng: "pt_br",
+  lng: loadInitialLanguage() ?? "pt-BR",
+  fallbacklng: "pt-BR",
   resources: {
-    en_us: {
+    "en-US": {
       translation: {
         login: enUsLogin,
         recoverPassword: enUsRecoverPassword,
         home: enUsHome,
       },
     },
-    pt_br: {
+    "pt-BR": {
       translation: {
         login: ptBrLogin,
         recoverPassword: ptBrRecoverPassword,

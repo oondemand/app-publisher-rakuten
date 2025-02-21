@@ -27,7 +27,7 @@
   "ticketDetails.table.head.label.competencia": "Competência",
   "ticketDetails.table.head.label.valor": "Competência",
 
-  "ticketDetails.dialog.button.baixarRpa": "Baixar Rpa",
+  "ticketDetails.dialog.button.arquivo": "Baixar arquivos",
 
   "dropdown.logout": "Logout",
   

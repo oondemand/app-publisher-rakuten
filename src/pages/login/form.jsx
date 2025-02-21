@@ -44,7 +44,7 @@ export const LoginForm = () => {
 
   const { mutateAsync: LoginMutation } = useMutation({
     mutationFn: LoginService.login,
-    onSuccess({ token, usuario: user }) {
+    onSuccess: ({ token, usuario: user }) => {
       if (user.tipo === "prestador") {
         login(token, user);
         return navigate("/");

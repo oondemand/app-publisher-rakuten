@@ -1,0 +1,36 @@
+{
+  "header.logo.description": "Central publisher",
+  "header.title": "Que bom ter você por aqui :)",
+  "header.description": "Vamos juntos transformar sua rotina com tecnologia.",
+
+  "form.email.label": "Seu email",
+  "form.email.placeholder": "Seu email",
+  "form.senha.label": "Sua senha",
+  "form.senha.placeholder": "Sua senha",
+  "form.button.submit": "Enviar",
+  "footer.link": "Esqueci minha senha",
+
+  "dialog.title": "Recuperação de Senha",
+  "dialog.description": "Informe o e-mail associado à sua conta. Você receberá um link para redefinir sua senha.",
+
+  "dialog.form.email.label": "Seu email",
+  "dialog.form.email.placeholder": "Seu email",
+  "dialog.form.button.submit": "Enviar",
+
+  "validation.form.email.error.required": "Email é obrigatório",
+  "validation.form.email.error.invalid": "Email inválido!",
+  "validation.form.senha.error.required": "Senha é obrigatório",
+  "validation.form.senha.error.min": "A senha precisa ter pelo menos 6 dígitos!",
+  "validation.dialog.form.email.error.required": "Email é obrigatório",
+  "validation.dialog.form.email.error.invalid": "Email inválido!",
+
+  "common.form.toast.login.permission.error.message": "Sem permissões para acessar o app publisher!",
+  "common.form.toast.login.permission.error.description": "Verifique suas permissões com um administrador.",
+  "common.form.toast.login.unexpected.error.message": "Erro ao fazer login",
+  "common.form.toast.login.unexpected.error.description": "Ouve um erro inesperado ao fazer login!",
+
+  "dialog.common.toast.success": "Verifique seu e-mail. ",
+  "dialog.common.toast.success.description": "Te enviamos um link para redefinir sua senha",
+  "dialog.common.toast.error": "Ouve um erro ao recuperar senha",
+  "dialog.common.toast.error.description": "Um erro inesperado aconteceu ao recuperar sua senha"
+}

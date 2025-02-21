@@ -16,17 +16,19 @@ import { CircleCheckBig, RefreshCcw, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { TicketService } from "../../services/tickets";
 import { useQuery } from "@tanstack/react-query";
-import { formatBRL } from "../../utils/currency";
+import { formatCurrency } from "../../utils/currency";
 import { format } from "date-fns";
 
 import "./custom-scrollbar.css";
 import { TicketDetailsDialog } from "./ticketDetailsDialog";
+import { useTranslation } from "react-i18next";
 
 export const addTotalValueOfServices = (services) => {
   return services.reduce((acc, curr) => acc + curr.valorTotal, 0);
 };
 
 export const Home = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [ticketDetailsModal, setTicketDetailsModal] = useState({
     open: false,
@@ -53,20 +55,22 @@ export const Home = () => {
         <Dropdown />
       </div>
       <div className="px-6 py-4">
-        <h1 className="text-left font-bold text-brand-500 text-2xl">{`Olá ${user.nome}, seja bem vindo(a) :)`}</h1>
+        <h1 className="text-left font-bold text-brand-500 text-2xl">
+          {t("home.header.greeting", { nome: user.nome })}
+        </h1>
         <div className="pb-6" />
         <div className="flex justify-between gap-2">
           <Card className="px-1 bg-brand-500 text-white rounded-md">
             <CardHeader className="px-2 py-4">
               <CardTitle className="text-xs font-semibold flex gap-2 align-top">
                 <CircleCheckBig size={20} />
-                Total de comissões pagas.
+                {t("home.cards.comissoesPagas.title")}
               </CardTitle>
             </CardHeader>
             <CardContent className="px-2 pb-4">
               <p className="text-sm font-extrabold">
                 {isLoading && "..."}
-                {!isLoading && formatBRL(data?.valorTotalRecebido ?? 0)}
+                {!isLoading && formatCurrency(data?.valorTotalRecebido ?? 0)}
               </p>
             </CardContent>
           </Card>
@@ -74,36 +78,36 @@ export const Home = () => {
             <CardHeader className="px-2 py-4">
               <CardTitle className="text-xs font-semibold flex gap-2 align-top">
                 <CircleCheckBig size={20} />
-                Total de comissões Pendentes
+                {t("home.cards.comissoesPendentes.title")}
               </CardTitle>
             </CardHeader>
             <CardContent className="px-2 pb-4">
               <p className="text-sm font-extrabold">
                 {isLoading && "..."}
-                {!isLoading && formatBRL(data?.valorTotalPendente ?? 0)}
+                {!isLoading && formatCurrency(data?.valorTotalPendente ?? 0)}
               </p>
             </CardContent>
           </Card>
         </div>
         <div className="pb-6" />
         <span className="text-left font-bold text-brand-500 text-2xl">
-          Resumo Financeiro
+          {t("home.summary.title")}
         </span>
       </div>
       <div className="pb-6" />
       {isLoading && (
         <div className="px-6 font-semibold animate-pulse text-zinc-400">
-          Buscando tickets...
+          {t("home.header.loadingTickets")}
         </div>
       )}
       {!data && !isLoading && !error && (
         <div className="px-6 font-semibold text-zinc-400">
-          Não foram encontrados tickets...
+          {t("home.header.notFound")}
         </div>
       )}
       {error && !isLoading && (
         <div className="px-6 font-semibold text-zinc-400">
-          Ouve um erro ao carregar tickets...
+          {t("home.header.errorLoading")}
         </div>
       )}
 
@@ -112,12 +116,14 @@ export const Home = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-[11px] p-1 h-0">INCLUSÃO</TableHead>
                 <TableHead className="text-[11px] p-1 h-0">
-                  VALOR TOTAL
+                  {t("home.table.header.inclusao")}
                 </TableHead>
                 <TableHead className="text-[11px] p-1 h-0">
-                  STATUS DE PAGAMENTO
+                  {t("home.table.header.valorTotal")}
+                </TableHead>
+                <TableHead className="text-[11px] p-1 h-0">
+                  {t("home.table.header.statusPagamento")}
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -135,19 +141,22 @@ export const Home = () => {
                       </TableCell>
                       <TableCell className="text-xs">
                         <span className="underline font-semibold text-blue-500">
-                          {formatBRL(addTotalValueOfServices(ticket.servicos))}
+                          {formatCurrency(
+                            addTotalValueOfServices(ticket.servicos)
+                          )}
                         </span>
                       </TableCell>
                       <TableCell className="text-xs flex gap-2">
                         {ticket.status === "concluido" &&
                           ticket.etapa === "concluido" && (
                             <Badge className="rounded-2xl  bg-emerald-100 text-green-500 hover:bg-emerald-200 flex gap-2 items-center">
-                              <CircleCheckBig size={14} /> Pago
+                              <CircleCheckBig size={14} />{" "}
+                              {t("home.badge.pago")}
                             </Badge>
                           )}
                         {ticket.etapa === "integracao-omie" && (
                           <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
-                            <Clock size={14} /> Pendente
+                            <Clock size={14} /> {t("home.badge.pendente")}
                           </Badge>
                         )}
                         {![
@@ -157,7 +166,7 @@ export const Home = () => {
                         ].includes(ticket.etapa) && (
                           <Badge className="rounded-2xl bg-orange-200 text-orange-500 hover:bg-orange-300 flex gap-2 items-center">
                             <RefreshCcw size={14} />
-                            Processando
+                            {t("home.badge.processando")}
                           </Badge>
                         )}
                       </TableCell>

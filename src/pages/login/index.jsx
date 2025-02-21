@@ -9,20 +9,23 @@ import {
 
 import { LoginForm } from "./form";
 import { ForgetPasswordDialog } from "./dialog";
+import { useTranslation } from "react-i18next";
 
 export const Login = () => {
+  const { t } = useTranslation();
+
   return (
     <Card className="max-w-[390px] py-4">
       <CardHeader className="flex items-center space-y-2.5">
         <CardTitle className="text-brand-400 text-xs font-semibold  text-center">
-          Central do publisher
+          {t("login.header.logo.description")}
           <img src="/logo_rakuten_purple.png" />
         </CardTitle>
         <h2 className="text-brand-500 font-bold text-lg">
-          Que bom ter você por aqui :)
+          {t("login.header.title")}
         </h2>
         <CardDescription className="text-center text-base px-8">
-          Vamos juntos transformar sua rotina com tecnologia.
+          {t("login.header.description")}
         </CardDescription>
       </CardHeader>
       <CardContent>

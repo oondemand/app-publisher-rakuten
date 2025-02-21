@@ -1,0 +1,63 @@
+{
+  "header.greeting": "Hi {{nome}}, welcome :)",
+
+  "cards.comissoesPagas.title": "Total Paid Commissions",
+  "cards.comissoesPendentes.title": "Total Pending Commissions",
+
+  "summary.title": "Financial Summary",
+
+  "header.loadingTickets": "Loading tickets...",
+  "header.notFound": "No tickets found...",
+  "header.errorLoading": "There was an error loading the tickets...",
+
+  "table.header.inclusao": "CREATION DATE",
+  "table.header.valorTotal": "TOTAL AMOUNT",
+  "table.header.statusPagamento": "PAYMENT STATUS",
+
+  "badge.pago": "Paid",
+  "badge.pendente": "Pending",
+  "badge.processando": "Processing",
+
+  "ticketDetails.dialog.title": "Ticket Details",
+  "ticketDetails.dialog.status.label": "Status",
+  "ticketDetails.dialog.valorTotal.label": "Total amount:",
+  "ticketDetails.dialog.comissoes.label": "Commissions breakdown:",
+
+  "ticketDetails.table.head.label.competencia": "Billing Period",
+  "ticketDetails.table.head.label.valor": "Amount",
+
+  "ticketDetails.dialog.button.arquivo": "Download files",
+
+  "dropdown.logout": "Logout",
+  "dropdown.alterarSenha": "Change Password",
+
+  "resetPasswordDialog.header.title": "Reset Password",
+  "resetPasswordDialog.header.description": "Please enter your new password below.",
+
+  "resetPasswordDialog.form.senhaAtual.label": "Current password",
+  "resetPasswordDialog.form.senhaAtual.placeholder": "Your current password",
+
+  "resetPasswordDialog.form.novaSenha.label": "Enter your new password",
+  "resetPasswordDialog.form.novaSenha.placeholder": "Your new password",
+
+  "resetPasswordDialog.form.confirmacao.label": "Confirm your new password",
+  "resetPasswordDialog.form.confirmacao.placeholder": "Confirm your new password",
+
+  "resetPasswordDialog.form.button.submit": "Submit",
+
+  "resetPasswordDialog.validation.senhaAtual.required": "Current password is required",
+  "resetPasswordDialog.validation.senhaAtual.min": "Password must be at least 6 characters long",
+
+  "resetPasswordDialog.validation.novaSenha.required": "New password is required",
+  "resetPasswordDialog.validation.novaSenha.min": "Password must be at least 6 characters long",
+
+  "resetPasswordDialog.validation.confirmacao.required": "Confirmation is required",
+  "resetPasswordDialog.validation.confirmacao.min": "Confirmation must be at least 6 characters long",
+  "resetPasswordDialog.validation.confirmacao.notMatch": "Passwords must match",
+
+  "resetPasswordDialog.toast.success.message": "Password updated successfully!",
+  "resetPasswordDialog.toast.permission.error.message": "You don't have permission to access the publisher app!",
+  "resetPasswordDialog.toast.permission.error.description": "Please check your permissions with an administrator.",
+  "resetPasswordDialog.toast.unexpected.error.message": "There was an error updating the password.",
+  "resetPasswordDialog.toast.unexpected.error.description": "We couldn't update your password!"
+}

@@ -9,11 +9,13 @@ import {
 import { useEffect } from "react";
 import { RecoverPasswordForm } from "./form";
 import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const RecoverPassword = () => {
   const [searchParams] = useSearchParams();
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const token = searchParams.get("code");
@@ -27,12 +29,14 @@ export const RecoverPassword = () => {
     <Card className="max-w-[390px] py-4">
       <CardHeader className="flex items-center space-y-2.5">
         <CardTitle className="text-brand-400 text-xs font-semibold  text-center">
-          Central do publisher
+          {t("recoverPassword.header.logo.description")}
           <img src="/logo_rakuten_purple.png" />
         </CardTitle>
-        <h2 className="text-brand-500 font-bold text-lg">Bem-vindo(a)!</h2>
+        <h2 className="text-brand-500 font-bold text-lg">
+          {t("recoverPassword.header.title")}
+        </h2>
         <CardDescription className="text-center text-base px-8">
-          Crie sua senha para acessar a Central do Publisher Rakuten.
+          {t("recoverPassword.header.description")}
         </CardDescription>
       </CardHeader>
       <CardContent>

@@ -6,7 +6,12 @@ import { Toaster } from "@/components/ui/sonner";
 import { queryClient } from "./config/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
 
+import "./config/i18n";
+import { useTranslation } from "react-i18next";
+
 function App() {
+  const { t, i18n } = useTranslation();
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>

@@ -1,0 +1,64 @@
+{
+  "header.greeting": "Olá {{nome}}, seja bem vindo(a) :)",
+
+  "cards.comissoesPagas.title": "Total de comissões pagas.",
+  "cards.comissoesPendentes.title": "Total de comissões Pendentes",
+  
+  "summary.title": "Resumo Financeiro",
+
+  "header.loadingTickets": "Buscando tickets...",
+  "header.notFound": "Não foram encontrados tickets...",
+  "header.errorLoading": "Ouve um erro ao carregar tickets...",
+
+
+  "table.header.inclusao": "INCLUSÃO",
+  "table.header.valorTotal": "VALOR TOTAL",
+  "table.header.statusPagamento": "STATUS DE PAGAMENTO",
+
+  "badge.pago": "Pago",
+  "badge.pendente": "Pendente",
+  "badge.processando": "Processando",
+
+  "ticketDetails.dialog.title": "Detalhe do Ticket",
+  "ticketDetails.dialog.status.label": "Status",
+  "ticketDetails.dialog.valorTotal.label": "Valor total:",
+  "ticketDetails.dialog.comissoes.label": "Detalhamento das comissões:",
+
+  "ticketDetails.table.head.label.competencia": "Competência",
+  "ticketDetails.table.head.label.valor": "Competência",
+
+  "ticketDetails.dialog.button.arquivo": "Baixar arquivos",
+
+  "dropdown.logout": "Logout",
+  
+  "dropdown.alterarSenha": "Alterar senha",
+  "resetPasswordDialog.header.title": "Redefinir Senha",
+  "resetPasswordDialog.header.description": "Digite sua nova senha abaixo.",
+
+  "resetPasswordDialog.form.senhaAtual.label": "Senha atual",
+  "resetPasswordDialog.form.senhaAtual.placeholder": "Sua senha",
+
+  "resetPasswordDialog.form.novaSenha.label": "Digite sua nova senha",
+  "resetPasswordDialog.form.novaSenha.placeholder": "Sua nova senha",
+
+  "resetPasswordDialog.form.confirmacao.label": "Confirme sua nova senha",
+  "resetPasswordDialog.form.confirmacao.placeholder": "Confirme sua nova senha",
+
+  "resetPasswordDialog.form.button.submit": "Enviar",
+
+  "resetPasswordDialog.validation.senhaAtual.required": "Senha atual é obrigatória",
+  "resetPasswordDialog.validation.senhaAtual.min": "A senha precisa ter pelo menos 6 dígitos!",
+
+  "resetPasswordDialog.validation.novaSenha.required": "Senha é obrigatória",
+  "resetPasswordDialog.validation.novaSenha.min": "A senha precisa ter pelo menos 6 dígitos!",
+
+  "resetPasswordDialog.validation.confirmacao.required": "Confirmação é obrigatória",
+  "resetPasswordDialog.validation.confirmacao.min": "A confirmação precisa ter pelo menos 6 dígitos!",
+  "resetPasswordDialog.validation.confirmacao.notMatch": "A senha e a confirmação precisam ser iguais!",
+
+  "resetPasswordDialog.toast.success.message": "Senha atualizada com sucesso!",
+  "resetPasswordDialog.toast.permission.error.message": "Sem permissões para acessar o app publisher!",
+  "resetPasswordDialog.toast.permission.error.description": "Verifique suas permissões com um administrador.",
+  "resetPasswordDialog.toast.unexpected.error.message": "Ocorreu um erro ao alterar senha.",
+  "resetPasswordDialog.toast.unexpected.error.description": "Não foi possível alterar senha!"
+}

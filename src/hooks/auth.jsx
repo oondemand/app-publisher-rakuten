@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     setIsLoading(true);
@@ -12,6 +14,12 @@ export const AuthProvider = ({ children }) => {
       try {
         const token = localStorage.getItem("token");
         const localUser = localStorage.getItem("usuario");
+
+        // console.log("Local user", localUser);
+
+        // if (localUser && localUser?.config?.language) {
+        //   i18n.changeLanguage(localUser.config.language);
+        // }
 
         if (token && localUser) setUser(JSON.parse(localUser));
       } catch (error) {
@@ -28,6 +36,12 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
     localStorage.setItem("token", token);
     localStorage.setItem("usuario", JSON.stringify(user));
+
+    if (user?.idioma) {
+      localStorage.setItem("@app-publisher-language", user?.idioma);
+      i18n.changeLanguage(user?.idioma);
+    }
+
     setUser(user);
     setIsLoading(false);
   };

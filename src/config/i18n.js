@@ -17,8 +17,10 @@ function loadInitialLanguage() {
     return localStorageLang;
   }
 
+  const implementedLanguages = ["pt-BR", "en-US"];
   const browserLang = navigator.language;
-  return browserLang;
+
+  if (implementedLanguages.includes(browserLang)) return browserLang;
 }
 
 i18n.use(initReactI18next).init({

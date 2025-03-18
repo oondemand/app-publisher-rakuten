@@ -38,10 +38,7 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
         zip.file(file.nomeOriginal, file.data);
       });
       zip.generateAsync({ type: "blob" }).then(function (content) {
-        saveAs(
-          content,
-          `arquivos-${format(new Date(), "dd-MM-yyy")}.zip`
-        );
+        saveAs(content, `arquivos-${format(new Date(), "dd-MM-yyy")}.zip`);
       });
       return;
     }
@@ -123,12 +120,12 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                     <TableRow key={servico._id}>
                       <TableCell>
                         {formatCompetence({
-                          month: servico.mesCompetencia,
-                          year: servico.anoCompetencia,
+                          month: servico?.competencia?.mes,
+                          year: servico?.competencia?.ano,
                         })}
                       </TableCell>
                       <TableCell>
-                        {formatCurrency(servico.valorTotal)}
+                        {formatCurrency(servico?.valor)}
                       </TableCell>
                     </TableRow>
                   ))}

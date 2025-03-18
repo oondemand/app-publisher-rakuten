@@ -24,7 +24,7 @@ import { TicketDetailsDialog } from "./ticketDetailsDialog";
 import { useTranslation } from "react-i18next";
 
 export const addTotalValueOfServices = (services) => {
-  return services.reduce((acc, curr) => acc + curr.valorTotal, 0);
+  return services.reduce((acc, curr) => acc + curr.valor, 0);
 };
 
 export const Home = () => {
@@ -47,6 +47,8 @@ export const Home = () => {
     queryKey: ["tickets"],
     queryFn: async () => await TicketService.getTicketsByPrestadorId(user._id),
   });
+
+  console.log("DATA", data);
 
   return (
     <div className="flex flex-col max-h-screen pb-24">

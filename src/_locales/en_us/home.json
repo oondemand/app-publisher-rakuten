@@ -26,7 +26,15 @@
   "ticketDetails.table.head.label.competencia": "Billing Period",
   "ticketDetails.table.head.label.valor": "Amount",
 
-  "ticketDetails.dialog.header.arquivo": "Files:",
+  "ticketDetails.dialog.header.arquivo": "Files",
+
+  "ticketDetails.dialog.popover.valores.principal": "Main values:",
+"ticketDetails.dialog.popover.valores.revisao": "Review Values",
+
+"ticketDetails.dialog.popover.valores.grossValue": "Gross value",
+"ticketDetails.dialog.popover.valores.bonus": "Bonus",
+"ticketDetails.dialog.popover.valores.correcao": "Correction",
+"ticketDetails.dialog.popover.valores.paidPlacement": "Paid placement",
 
   "dropdown.logout": "Logout",
   "dropdown.alterarSenha": "Change Password",

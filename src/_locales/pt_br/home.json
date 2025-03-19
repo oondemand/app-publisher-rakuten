@@ -29,6 +29,14 @@
 
   "ticketDetails.dialog.header.arquivo": "Arquivos:",
 
+  "ticketDetails.dialog.popover.valores.principal": "Valor principal:",
+  "ticketDetails.dialog.popover.valores.revisao": "Valores de revisão",
+
+  "ticketDetails.dialog.popover.valores.grossValue": "Gross value",
+  "ticketDetails.dialog.popover.valores.bonus": "Bonus",
+  "ticketDetails.dialog.popover.valores.correcao": "Correção",
+  "ticketDetails.dialog.popover.valores.paidPlacement": "Paid placement",
+
   "dropdown.logout": "Logout",
   
   "dropdown.alterarSenha": "Alterar senha",

@@ -32,6 +32,7 @@ import { formatCompetence } from "../../utils/date";
 import { saveAs } from "file-saver";
 import { useTranslation } from "react-i18next";
 import { TicketService } from "../../services/tickets";
+import { ServiceDetailsPopover } from "./popover";
 
 export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
   const { t } = useTranslation();
@@ -132,6 +133,14 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                     })}
                   </AccordionContent>
                 </AccordionItem>
+                {/* <AccordionItem value="item-2">
+                  <AccordionTrigger className="py-1 outline-none border-none decoration-transparent font-semibold text-zinc-600 text-base">
+                    {t("home.ticketDetails.dialog.comissoes.label")}
+                  </AccordionTrigger>
+                  <AccordionContent className="space-y-2 mt-1 max-h-[95%]">
+
+                  </AccordionContent>
+                </AccordionItem> */}
               </Accordion>
             )}
             <span className="flex mt-1 gap-4 font-semibold text-zinc-600">
@@ -151,15 +160,17 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
               <TableBody>
                 {ticket &&
                   ticket?.servicos.map((servico) => (
-                    <TableRow key={servico._id}>
-                      <TableCell>
-                        {formatCompetence({
-                          month: servico?.competencia?.mes,
-                          year: servico?.competencia?.ano,
-                        })}
-                      </TableCell>
-                      <TableCell>{formatCurrency(servico?.valor)}</TableCell>
-                    </TableRow>
+                    <ServiceDetailsPopover key={servico._id} servico={servico}>
+                      <TableRow>
+                        <TableCell>
+                          {formatCompetence({
+                            month: servico?.competencia?.mes,
+                            year: servico?.competencia?.ano,
+                          })}
+                        </TableCell>
+                        <TableCell>{formatCurrency(servico?.valor)}</TableCell>
+                      </TableRow>
+                    </ServiceDetailsPopover>
                   ))}
               </TableBody>
             </Table>

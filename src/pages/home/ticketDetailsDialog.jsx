@@ -14,39 +14,40 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
 import { Button } from "@/components/ui/button";
 
 import { Badge } from "@/components/ui/badge";
-import { CircleCheckBig, RefreshCcw, Clock } from "lucide-react";
+import { CircleCheckBig, RefreshCcw, Clock, Download } from "lucide-react";
 import { formatCurrency } from "../../utils/currency";
 import { addTotalValueOfServices } from "./index";
 import { formatCompetence } from "../../utils/date";
 
-import JSZip from "jszip";
-import { format } from "date-fns";
 import { saveAs } from "file-saver";
 import { useTranslation } from "react-i18next";
+import { TicketService } from "../../services/tickets";
 
 export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
   const { t } = useTranslation();
-  const handleDownloadArquivos = async () => {
-    const arquivos = ticket.arquivos;
 
-    if (arquivos.length > 1) {
-      const zip = new JSZip();
-      arquivos.forEach((file) => {
-        zip.file(file.nomeOriginal, file.data);
-      });
-      zip.generateAsync({ type: "blob" }).then(function (content) {
-        saveAs(content, `arquivos-${format(new Date(), "dd-MM-yyy")}.zip`);
-      });
-      return;
+  const handleDownloadArquivo = async ({ id }) => {
+    try {
+      const { data } = await TicketService.getFile({ id });
+
+      if (data) {
+        const byteArray = new Uint8Array(data?.buffer?.data);
+        const blob = new Blob([byteArray], { type: data?.mimetype });
+        saveAs(blob, data?.nomeOriginal);
+      }
+    } catch (error) {
+      console.log("Error", error);
     }
-
-    const arquivo = arquivos[0];
-    const byteArray = new Uint8Array(arquivo.buffer.data);
-    const blob = new Blob([byteArray], { type: arquivo.mimetype });
-    saveAs(blob, arquivo.nomeOriginal);
   };
 
   return (
@@ -100,7 +101,40 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                 )}
               </p>
             </span>
-            <span className="flex gap-4 font-semibold text-zinc-600">
+            {ticket?.arquivos.length > 0 && (
+              <Accordion
+                type="single"
+                collapsible
+                className="border-none outline-none"
+              >
+                <AccordionItem value="item-1">
+                  <AccordionTrigger className="py-1 outline-none border-none decoration-transparent font-semibold text-zinc-600 text-base">
+                    {t("home.ticketDetails.dialog.header.arquivo")}
+                  </AccordionTrigger>
+                  <AccordionContent className="space-y-2 mt-1 max-h-[95%]">
+                    {ticket?.arquivos.map((e) => {
+                      return (
+                        <div className="flex justify-between items-center">
+                          <div className="font-medium text-zinc-500">
+                            {e?.nomeOriginal}
+                          </div>
+                          <Button
+                            onClick={async () => {
+                              await handleDownloadArquivo({ id: e?._id });
+                            }}
+                            variant="outline"
+                            className="size-6 rounded-lg bg-transparent border-none outline-none text-brand-500 hover:text-brand-500"
+                          >
+                            <Download />
+                          </Button>
+                        </div>
+                      );
+                    })}
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            )}
+            <span className="flex mt-1 gap-4 font-semibold text-zinc-600">
               {t("home.ticketDetails.dialog.comissoes.label")}
             </span>
             <Table>
@@ -124,21 +158,11 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                           year: servico?.competencia?.ano,
                         })}
                       </TableCell>
-                      <TableCell>
-                        {formatCurrency(servico?.valor)}
-                      </TableCell>
+                      <TableCell>{formatCurrency(servico?.valor)}</TableCell>
                     </TableRow>
                   ))}
               </TableBody>
             </Table>
-            {ticket?.arquivos.length > 0 && (
-              <Button
-                onClick={handleDownloadArquivos}
-                className="w-full bg-sky-500 hover:bg-sky-700 font-semibold"
-              >
-                {t("home.ticketDetails.dialog.button.arquivo")}
-              </Button>
-            )}
           </div>
         </div>
       </DialogContent>

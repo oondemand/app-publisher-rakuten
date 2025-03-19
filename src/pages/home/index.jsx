@@ -48,8 +48,6 @@ export const Home = () => {
     queryFn: async () => await TicketService.getTicketsByPrestadorId(user._id),
   });
 
-  console.log("DATA", data);
-
   return (
     <div className="flex flex-col max-h-screen pb-24">
       <div className="px-3 py-3 flex items-center justify-between shadow-sm">

@@ -26,7 +26,7 @@
   "ticketDetails.table.head.label.competencia": "Billing Period",
   "ticketDetails.table.head.label.valor": "Amount",
 
-  "ticketDetails.dialog.button.arquivo": "Download files",
+  "ticketDetails.dialog.header.arquivo": "Files:",
 
   "dropdown.logout": "Logout",
   "dropdown.alterarSenha": "Change Password",

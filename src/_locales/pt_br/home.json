@@ -25,9 +25,9 @@
   "ticketDetails.dialog.comissoes.label": "Detalhamento das comissões:",
 
   "ticketDetails.table.head.label.competencia": "Competência",
-  "ticketDetails.table.head.label.valor": "Competência",
+  "ticketDetails.table.head.label.valor": "Valor",
 
-  "ticketDetails.dialog.button.arquivo": "Baixar arquivos",
+  "ticketDetails.dialog.header.arquivo": "Arquivos:",
 
   "dropdown.logout": "Logout",
   

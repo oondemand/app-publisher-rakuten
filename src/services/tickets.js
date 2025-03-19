@@ -5,6 +5,11 @@ const getTicketsByPrestadorId = async (id) => {
   return data;
 };
 
+const getFile = async ({ id }) => {
+  return await api.get(`/tickets/arquivo/${id}`);
+};
+
 export const TicketService = {
   getTicketsByPrestadorId,
+  getFile,
 };

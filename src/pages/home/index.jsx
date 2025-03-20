@@ -139,7 +139,7 @@ export const Home = () => {
                       key={ticket._id}
                     >
                       <TableCell className="text-xs font-semibold text-neutral-600">
-                        {format(ticket.createdAt, "dd/MM")}
+                        {format(ticket.createdAt, "dd/MM/yyyy")}
                       </TableCell>
                       <TableCell className="text-xs">
                         <span className="underline font-semibold text-blue-500">

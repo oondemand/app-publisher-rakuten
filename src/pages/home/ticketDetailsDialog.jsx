@@ -14,6 +14,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
 import {
   Accordion,
   AccordionContent,
@@ -33,6 +36,8 @@ import { saveAs } from "file-saver";
 import { useTranslation } from "react-i18next";
 import { TicketService } from "../../services/tickets";
 import { ServiceDetailsPopover } from "./popover";
+import { toast } from "sonner";
+import { useMutation } from "@tanstack/react-query";
 
 export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
   const { t } = useTranslation();
@@ -40,7 +45,6 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
   const handleDownloadArquivo = async ({ id }) => {
     try {
       const { data } = await TicketService.getFile({ id });
-
       if (data) {
         const byteArray = new Uint8Array(data?.buffer?.data);
         const blob = new Blob([byteArray], { type: data?.mimetype });
@@ -50,6 +54,25 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
       console.log("Error", error);
     }
   };
+
+  const { mutateAsync: uploadFileMutation } = useMutation({
+    mutationFn: async ({ files }) =>
+      await TicketService.uploadFiles({ ticketId: ticket._id, files }),
+    onSuccess: ({ data }) => {
+      console.log("Arquivo enviado", data);
+
+      const { nomeOriginal, mimetype, size, tipo, _id } = data?.arquivos[0];
+      ticket.arquivos = [
+        ...ticket.arquivos,
+        { nomeOriginal, mimetype, size, tipo, _id },
+      ];
+
+      toast.success(t("home.ticketDetails.toast.importFiles.success.message"));
+    },
+    onError: () => {
+      toast.error(t("home.ticketDetails.toast.importFiles.error.message"));
+    },
+  });
 
   return (
     <Dialog
@@ -108,10 +131,11 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                 )}
               </p>
             </span>
-            {ticket?.arquivos.length > 0 && (
+            {ticket?.etapa && (
               <Accordion
                 type="single"
                 collapsible
+                defaultValue="item-1"
                 className="border-none outline-none"
               >
                 <AccordionItem value="item-1">
@@ -121,7 +145,10 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                   <AccordionContent className="space-y-2 mt-1 max-h-[95%]">
                     {ticket?.arquivos.map((e) => {
                       return (
-                        <div className="flex justify-between items-center">
+                        <div
+                          key={e?._id}
+                          className="flex justify-between items-center"
+                        >
                           <div className="font-medium text-zinc-500">
                             {e?.nomeOriginal}
                           </div>
@@ -137,16 +164,31 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                         </div>
                       );
                     })}
+
+                    <div className="w-full pt-2">
+                      <input
+                        accept="application/pdf"
+                        type="file"
+                        id="file-input"
+                        className="hidden"
+                        onChange={async (e) => {
+                          if (e.target?.files > 0) {
+                            await uploadFileMutation({
+                              files: [e.target.files[0]],
+                            });
+                          }
+                        }}
+                      />
+
+                      <label
+                        for="file-input"
+                        className="min-w-full text-sm inline-block cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-medium py-1 px-4 rounded-md transition-colors duration-200"
+                      >
+                        {t("home.ticketDetails.dialog.importFiles.label")}
+                      </label>
+                    </div>
                   </AccordionContent>
                 </AccordionItem>
-                {/* <AccordionItem value="item-2">
-                  <AccordionTrigger className="py-1 outline-none border-none decoration-transparent font-semibold text-zinc-600 text-base">
-                    {t("home.ticketDetails.dialog.comissoes.label")}
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-2 mt-1 max-h-[95%]">
-
-                  </AccordionContent>
-                </AccordionItem> */}
               </Accordion>
             )}
             <span className="flex mt-1 gap-4 font-semibold text-zinc-600">

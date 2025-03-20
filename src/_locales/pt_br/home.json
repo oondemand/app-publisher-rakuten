@@ -20,6 +20,8 @@
   "badge.pendente": "Pendente",
   "badge.processando": "Processando",
 
+  "ticketDetails.dialog.importFiles.label": "Importar aquivo",
+
   "ticketDetails.dialog.title": "Detalhe do Ticket",
   "ticketDetails.dialog.status.label": "Status",
   "ticketDetails.dialog.valorTotal.label": "Valor total:",
@@ -28,7 +30,7 @@
   "ticketDetails.table.head.label.competencia": "Competência",
   "ticketDetails.table.head.label.valor": "Valor",
 
-  "ticketDetails.dialog.header.arquivo": "Arquivos:",
+  "ticketDetails.dialog.header.arquivo": "Arquivos",
 
   "ticketDetails.dialog.popover.valores.principal": "Valor principal:",
   "ticketDetails.dialog.popover.valores.revisao": "Valores de revisão",
@@ -69,5 +71,8 @@
   "resetPasswordDialog.toast.permission.error.message": "Sem permissões para acessar o app publisher!",
   "resetPasswordDialog.toast.permission.error.description": "Verifique suas permissões com um administrador.",
   "resetPasswordDialog.toast.unexpected.error.message": "Ocorreu um erro ao alterar senha.",
-  "resetPasswordDialog.toast.unexpected.error.description": "Não foi possível alterar senha!"
+  "resetPasswordDialog.toast.unexpected.error.description": "Não foi possível alterar senha!",
+
+  "ticketDetails.toast.importFiles.success.message": "Arquivo anexado com sucesso.",
+  "ticketDetails.toast.importFiles.error.message": "Ouve um erro ao anexar arquivo."
 }

@@ -48,6 +48,8 @@ export const Home = () => {
     queryFn: async () => await TicketService.getTicketsByPrestadorId(user._id),
   });
 
+  console.log(data);
+
   return (
     <div className="flex flex-col max-h-screen pb-24">
       <div className="px-3 py-3 flex items-center justify-between shadow-sm">
@@ -147,6 +149,12 @@ export const Home = () => {
                         </span>
                       </TableCell>
                       <TableCell className="text-xs flex gap-2">
+                        {ticket.status === "aberto" && !ticket?.etapa && (
+                          <Badge className="rounded-2xl  bg-zinc-100 text-zinc-500 hover:bg-zinc-200 flex gap-2 items-center">
+                            <CircleCheckBig size={14} />{" "}
+                            {t("home.badge.aberto")}
+                          </Badge>
+                        )}
                         {ticket.status === "concluido" &&
                           ticket.etapa === "concluido" && (
                             <Badge className="rounded-2xl  bg-emerald-100 text-green-500 hover:bg-emerald-200 flex gap-2 items-center">
@@ -159,16 +167,17 @@ export const Home = () => {
                             <Clock size={14} /> {t("home.badge.pendente")}
                           </Badge>
                         )}
-                        {![
-                          "requisicao",
-                          "concluido",
-                          "integracao-omie",
-                        ].includes(ticket.etapa) && (
-                          <Badge className="rounded-2xl bg-orange-200 text-orange-500 hover:bg-orange-300 flex gap-2 items-center">
-                            <RefreshCcw size={14} />
-                            {t("home.badge.processando")}
-                          </Badge>
-                        )}
+                        {ticket?.etapa &&
+                          ![
+                            "requisicao",
+                            "concluido",
+                            "integracao-omie",
+                          ].includes(ticket.etapa) && (
+                            <Badge className="rounded-2xl bg-orange-200 text-orange-500 hover:bg-orange-300 flex gap-2 items-center">
+                              <RefreshCcw size={14} />
+                              {t("home.badge.processando")}
+                            </Badge>
+                          )}
                       </TableCell>
                     </TableRow>
                   )

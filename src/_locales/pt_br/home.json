@@ -15,6 +15,7 @@
   "table.header.valorTotal": "VALOR TOTAL",
   "table.header.statusPagamento": "STATUS DE PAGAMENTO",
 
+  "badge.aberto": "Aberto",
   "badge.pago": "Pago",
   "badge.pendente": "Pendente",
   "badge.processando": "Processando",

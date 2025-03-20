@@ -72,6 +72,11 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
           <div className="flex flex-col gap-2">
             <span className="flex gap-4 font-semibold text-zinc-600">
               {t("home.ticketDetails.dialog.status.label")}{" "}
+              {ticket && ticket?.status === "aberto" && !ticket?.etapa && (
+                <Badge className="rounded-2xl  bg-zinc-100 text-zinc-500 hover:bg-zinc-200 flex gap-2 items-center">
+                  <CircleCheckBig size={14} /> {t("home.badge.aberto")}
+                </Badge>
+              )}
               {ticket &&
                 ticket.status === "concluido" &&
                 ticket.etapa === "concluido" && (
@@ -85,6 +90,7 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                 </Badge>
               )}
               {ticket &&
+                ticket?.etapa &&
                 !["requisicao", "concluido", "integracao-omie"].includes(
                   ticket.etapa
                 ) && (

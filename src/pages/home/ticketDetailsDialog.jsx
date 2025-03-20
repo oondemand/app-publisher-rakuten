@@ -172,7 +172,7 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                         id="file-input"
                         className="hidden"
                         onChange={async (e) => {
-                          if (e.target?.files > 0) {
+                          if (e.target?.files.length > 0) {
                             await uploadFileMutation({
                               files: [e.target.files[0]],
                             });
@@ -182,7 +182,7 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
 
                       <label
                         for="file-input"
-                        className="min-w-full text-sm inline-block cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-medium py-1 px-4 rounded-md transition-colors duration-200"
+                        className="min-w-full text-sm inline-block cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-medium py-1.5 px-4 rounded-md transition-colors duration-200"
                       >
                         {t("home.ticketDetails.dialog.importFiles.label")}
                       </label>

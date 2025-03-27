@@ -48,7 +48,7 @@ export const Home = () => {
     queryFn: async () => await TicketService.getTicketsByPrestadorId(user._id),
   });
 
-  console.log(data);
+  console.log("DATA", data);
 
   return (
     <div className="flex flex-col max-h-screen pb-24">
@@ -102,16 +102,16 @@ export const Home = () => {
           {t("home.header.loadingTickets")}
         </div>
       )}
-      {!data && !isLoading && !error && (
+      {((!data && !isLoading) || data?.tickets.length === 0) && (
         <div className="px-6 font-semibold text-zinc-400">
           {t("home.header.notFound")}
         </div>
       )}
-      {error && !isLoading && (
+      {/* {error && !isLoading && (
         <div className="px-6 font-semibold text-zinc-400">
           {t("home.header.errorLoading")}
         </div>
-      )}
+      )} */}
 
       {data && data.tickets.length > 0 && (
         <div className="px-6 flex-grow overflow-y-scroll custom-scrollbar relative transition-all">

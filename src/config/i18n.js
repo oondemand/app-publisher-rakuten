@@ -20,7 +20,9 @@ function loadInitialLanguage() {
   const implementedLanguages = ["pt-BR", "en-US"];
   const browserLang = navigator.language;
 
-  if (implementedLanguages.includes(browserLang)) return browserLang;
+  if (!implementedLanguages.includes(browserLang)) return "pt-BR";
+
+  return implementedLanguages;
 }
 
 i18n.use(initReactI18next).init({

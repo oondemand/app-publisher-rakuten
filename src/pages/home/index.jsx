@@ -24,7 +24,7 @@ import { TicketDetailsDialog } from "./ticketDetailsDialog";
 import { useTranslation } from "react-i18next";
 
 export const addTotalValueOfServices = (services) => {
-  return services.reduce((acc, curr) => acc + curr.valorTotal, 0);
+  return services.reduce((acc, curr) => acc + curr.valor, 0);
 };
 
 export const Home = () => {
@@ -100,16 +100,16 @@ export const Home = () => {
           {t("home.header.loadingTickets")}
         </div>
       )}
-      {!data && !isLoading && !error && (
+      {((!data && !isLoading) || data?.tickets.length === 0) && (
         <div className="px-6 font-semibold text-zinc-400">
           {t("home.header.notFound")}
         </div>
       )}
-      {error && !isLoading && (
+      {/* {error && !isLoading && (
         <div className="px-6 font-semibold text-zinc-400">
           {t("home.header.errorLoading")}
         </div>
-      )}
+      )} */}
 
       {data && data.tickets.length > 0 && (
         <div className="px-6 flex-grow overflow-y-scroll custom-scrollbar relative transition-all">
@@ -137,7 +137,7 @@ export const Home = () => {
                       key={ticket._id}
                     >
                       <TableCell className="text-xs font-semibold text-neutral-600">
-                        {format(ticket.createdAt, "dd/MM")}
+                        {format(ticket.createdAt, "dd/MM/yyyy")}
                       </TableCell>
                       <TableCell className="text-xs">
                         <span className="underline font-semibold text-blue-500">
@@ -147,6 +147,12 @@ export const Home = () => {
                         </span>
                       </TableCell>
                       <TableCell className="text-xs flex gap-2">
+                        {ticket.status === "aberto" && !ticket?.etapa && (
+                          <Badge className="rounded-2xl  bg-zinc-100 text-zinc-500 hover:bg-zinc-200 flex gap-2 items-center">
+                            <CircleCheckBig size={14} />{" "}
+                            {t("home.badge.aberto")}
+                          </Badge>
+                        )}
                         {ticket.status === "concluido" &&
                           ticket.etapa === "concluido" && (
                             <Badge className="rounded-2xl  bg-emerald-100 text-green-500 hover:bg-emerald-200 flex gap-2 items-center">
@@ -159,16 +165,17 @@ export const Home = () => {
                             <Clock size={14} /> {t("home.badge.pendente")}
                           </Badge>
                         )}
-                        {![
-                          "requisicao",
-                          "concluido",
-                          "integracao-omie",
-                        ].includes(ticket.etapa) && (
-                          <Badge className="rounded-2xl bg-orange-200 text-orange-500 hover:bg-orange-300 flex gap-2 items-center">
-                            <RefreshCcw size={14} />
-                            {t("home.badge.processando")}
-                          </Badge>
-                        )}
+                        {ticket?.etapa &&
+                          ![
+                            "requisicao",
+                            "concluido",
+                            "integracao-omie",
+                          ].includes(ticket.etapa) && (
+                            <Badge className="rounded-2xl bg-orange-200 text-orange-500 hover:bg-orange-300 flex gap-2 items-center">
+                              <RefreshCcw size={14} />
+                              {t("home.badge.processando")}
+                            </Badge>
+                          )}
                       </TableCell>
                     </TableRow>
                   )

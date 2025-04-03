@@ -20,9 +20,15 @@ const changePassword = async (values) => {
   return data;
 };
 
+const validateToken = async () => {
+  const response = await api.get("/auth/validar-token");
+  return response.data;
+};
+
 export const LoginService = {
   login,
   forgotPassword,
   createNewPassword,
   changePassword,
+  validateToken,
 };

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { LoginService } from "../services/auth";
 
 const AuthContext = createContext();
 
@@ -10,18 +11,13 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    const initializeAuth = () => {
+    const initializeAuth = async () => {
       try {
         const token = localStorage.getItem("token");
         const localUser = localStorage.getItem("usuario");
 
-        // console.log("Local user", localUser);
-
-        // if (localUser && localUser?.config?.language) {
-        //   i18n.changeLanguage(localUser.config.language);
-        // }
-
         if (token && localUser) setUser(JSON.parse(localUser));
+        await LoginService.validateToken();
       } catch (error) {
         console.error("Erro ao inicializar a autenticação:", error);
         logout();
@@ -37,13 +33,13 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("token", token);
     localStorage.setItem("usuario", JSON.stringify(user));
 
+    setUser(user);
+    setIsLoading(false);
+
     if (user?.idioma) {
       localStorage.setItem("@app-publisher-language", user?.idioma);
       i18n.changeLanguage(user?.idioma);
     }
-
-    setUser(user);
-    setIsLoading(false);
   };
 
   const logout = () => {

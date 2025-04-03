@@ -14,9 +14,12 @@
   "table.header.valorTotal": "TOTAL AMOUNT",
   "table.header.statusPagamento": "PAYMENT STATUS",
 
+  "badge.aberto": "Open",
   "badge.pago": "Paid",
   "badge.pendente": "Pending",
   "badge.processando": "Processing",
+
+  "ticketDetails.dialog.importFiles.label": "Import file",
 
   "ticketDetails.dialog.title": "Ticket Details",
   "ticketDetails.dialog.status.label": "Status",
@@ -26,7 +29,15 @@
   "ticketDetails.table.head.label.competencia": "Billing Period",
   "ticketDetails.table.head.label.valor": "Amount",
 
-  "ticketDetails.dialog.button.arquivo": "Download files",
+  "ticketDetails.dialog.header.arquivo": "Files",
+
+  "ticketDetails.dialog.popover.valores.principal": "Main values:",
+"ticketDetails.dialog.popover.valores.revisao": "Review Values",
+
+"ticketDetails.dialog.popover.valores.grossValue": "Gross value",
+"ticketDetails.dialog.popover.valores.bonus": "Bonus",
+"ticketDetails.dialog.popover.valores.correcao": "Correction",
+"ticketDetails.dialog.popover.valores.paidPlacement": "Paid placement",
 
   "dropdown.logout": "Logout",
   "dropdown.alterarSenha": "Change Password",
@@ -59,5 +70,8 @@
   "resetPasswordDialog.toast.permission.error.message": "You don't have permission to access the publisher app!",
   "resetPasswordDialog.toast.permission.error.description": "Please check your permissions with an administrator.",
   "resetPasswordDialog.toast.unexpected.error.message": "There was an error updating the password.",
-  "resetPasswordDialog.toast.unexpected.error.description": "We couldn't update your password!"
+  "resetPasswordDialog.toast.unexpected.error.description": "We couldn't update your password!",
+
+  "ticketDetails.toast.importFiles.success.message": "File successfully attached",
+"ticketDetails.toast.importFiles.error.message": "File attachment failed"
 }

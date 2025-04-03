@@ -62,6 +62,15 @@ export const RecoverPasswordForm = () => {
       });
     },
     onError: (error) => {
+      if (
+        error?.response?.status === 401 &&
+        error?.response?.data?.error === "Token inválido."
+      ) {
+        return toast.error(
+          t("recoverPassword.toast.unexpected.error.tokenInvalido.message")
+        );
+      }
+      console.log("Erro", error);
       toast.error(t("recoverPassword.toast.unexpected.error.message"));
     },
   });

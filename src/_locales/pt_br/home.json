@@ -11,13 +11,16 @@
   "header.errorLoading": "Ouve um erro ao carregar tickets...",
 
 
-  "table.header.inclusao": "INCLUSÃO",
+  "table.header.inclusao": "DATA",
   "table.header.valorTotal": "VALOR TOTAL",
   "table.header.statusPagamento": "STATUS DE PAGAMENTO",
 
+  "badge.aberto": "Aberto",
   "badge.pago": "Pago",
   "badge.pendente": "Pendente",
   "badge.processando": "Processando",
+
+  "ticketDetails.dialog.importFiles.label": "Importar aquivo",
 
   "ticketDetails.dialog.title": "Detalhe do Ticket",
   "ticketDetails.dialog.status.label": "Status",
@@ -25,9 +28,17 @@
   "ticketDetails.dialog.comissoes.label": "Detalhamento das comissões:",
 
   "ticketDetails.table.head.label.competencia": "Competência",
-  "ticketDetails.table.head.label.valor": "Competência",
+  "ticketDetails.table.head.label.valor": "Valor",
 
-  "ticketDetails.dialog.button.arquivo": "Baixar arquivos",
+  "ticketDetails.dialog.header.arquivo": "Arquivos",
+
+  "ticketDetails.dialog.popover.valores.principal": "Valor principal:",
+  "ticketDetails.dialog.popover.valores.revisao": "Valores de revisão",
+
+  "ticketDetails.dialog.popover.valores.grossValue": "Gross value",
+  "ticketDetails.dialog.popover.valores.bonus": "Bonus",
+  "ticketDetails.dialog.popover.valores.correcao": "Correção",
+  "ticketDetails.dialog.popover.valores.paidPlacement": "Paid placement",
 
   "dropdown.logout": "Logout",
   
@@ -60,5 +71,8 @@
   "resetPasswordDialog.toast.permission.error.message": "Sem permissões para acessar o app publisher!",
   "resetPasswordDialog.toast.permission.error.description": "Verifique suas permissões com um administrador.",
   "resetPasswordDialog.toast.unexpected.error.message": "Ocorreu um erro ao alterar senha.",
-  "resetPasswordDialog.toast.unexpected.error.description": "Não foi possível alterar senha!"
+  "resetPasswordDialog.toast.unexpected.error.description": "Não foi possível alterar senha!",
+
+  "ticketDetails.toast.importFiles.success.message": "Arquivo anexado com sucesso.",
+  "ticketDetails.toast.importFiles.error.message": "Ouve um erro ao anexar arquivo."
 }

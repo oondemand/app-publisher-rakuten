@@ -73,5 +73,6 @@
   "resetPasswordDialog.toast.unexpected.error.description": "We couldn't update your password!",
 
   "ticketDetails.toast.importFiles.success.message": "File successfully attached",
-"ticketDetails.toast.importFiles.error.message": "File attachment failed"
+"ticketDetails.toast.importFiles.error.message": "File attachment failed",
+"ticketDetails.toast.importFiles.error.size.message": "The selected file exceeds the 0.5M limit."
 }

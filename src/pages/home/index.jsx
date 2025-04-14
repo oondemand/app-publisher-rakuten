@@ -18,6 +18,7 @@ import { TicketService } from "../../services/tickets";
 import { useQuery } from "@tanstack/react-query";
 import { formatCurrency } from "../../utils/currency";
 import { format } from "date-fns";
+import { formatDateToDDMMYYYY } from "../../utils/date";
 
 import "./custom-scrollbar.css";
 import { TicketDetailsDialog } from "./ticketDetailsDialog";
@@ -117,13 +118,13 @@ export const Home = () => {
             <TableHeader>
               <TableRow>
                 <TableHead className="text-[11px] p-1 h-0">
+                  {t("home.table.header.statusPagamento")}
+                </TableHead>
+                <TableHead className="text-[11px] p-1 h-0">
                   {t("home.table.header.inclusao")}
                 </TableHead>
                 <TableHead className="text-[11px] p-1 h-0">
                   {t("home.table.header.valorTotal")}
-                </TableHead>
-                <TableHead className="text-[11px] p-1 h-0">
-                  {t("home.table.header.statusPagamento")}
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -136,16 +137,6 @@ export const Home = () => {
                       onClick={() => handleOpenTicketDetailsModal(ticket)}
                       key={ticket._id}
                     >
-                      <TableCell className="text-xs font-semibold text-neutral-600">
-                        {format(ticket.createdAt, "dd/MM/yyyy")}
-                      </TableCell>
-                      <TableCell className="text-xs">
-                        <span className="underline font-semibold text-blue-500">
-                          {formatCurrency(
-                            addTotalValueOfServices(ticket.servicos)
-                          )}
-                        </span>
-                      </TableCell>
                       <TableCell className="text-xs flex gap-2">
                         {ticket.status === "aberto" && !ticket?.etapa && (
                           <Badge className="rounded-2xl  bg-zinc-100 text-zinc-500 hover:bg-zinc-200 flex gap-2 items-center">
@@ -153,29 +144,45 @@ export const Home = () => {
                             {t("home.badge.aberto")}
                           </Badge>
                         )}
-                        {ticket.status === "concluido" &&
-                          ticket.etapa === "concluido" && (
-                            <Badge className="rounded-2xl  bg-emerald-100 text-green-500 hover:bg-emerald-200 flex gap-2 items-center">
-                              <CircleCheckBig size={14} />{" "}
-                              {t("home.badge.pago")}
-                            </Badge>
-                          )}
-                        {ticket.etapa === "integracao-omie" && (
+                        {((ticket.status === "concluido" &&
+                          ticket.etapa === "concluido") ||
+                          ticket.status === "pago-externo") && (
+                          <Badge className="rounded-2xl  bg-emerald-100 text-green-500 hover:bg-emerald-200 flex gap-2 items-center">
+                            <CircleCheckBig size={14} /> {t("home.badge.pago")}
+                          </Badge>
+                        )}
+                        {/* {ticket.etapa === "integracao-omie" && (
                           <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
                             <Clock size={14} /> {t("home.badge.pendente")}
                           </Badge>
-                        )}
+                        )} */}
                         {ticket?.etapa &&
                           ![
                             "requisicao",
                             "concluido",
-                            "integracao-omie",
+                            // "integracao-omie",
                           ].includes(ticket.etapa) && (
-                            <Badge className="rounded-2xl bg-orange-200 text-orange-500 hover:bg-orange-300 flex gap-2 items-center">
+                            <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
                               <RefreshCcw size={14} />
                               {t("home.badge.processando")}
                             </Badge>
                           )}
+                      </TableCell>
+                      <TableCell className="text-xs font-semibold text-neutral-600">
+                        {ticket.dataRegistro
+                          ? formatDateToDDMMYYYY(ticket.dataRegistro)
+                          : ticket.servicos[0]?.dataRegistro
+                          ? formatDateToDDMMYYYY(
+                              ticket.servicos[0]?.dataRegistro
+                            )
+                          : "-"}
+                      </TableCell>
+                      <TableCell className="text-xs">
+                        <span className="underline font-semibold text-blue-500">
+                          {formatCurrency(
+                            addTotalValueOfServices(ticket.servicos)
+                          )}
+                        </span>
                       </TableCell>
                     </TableRow>
                   )

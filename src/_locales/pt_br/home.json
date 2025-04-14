@@ -11,7 +11,7 @@
   "header.errorLoading": "Ouve um erro ao carregar tickets...",
 
 
-  "table.header.inclusao": "DATA",
+  "table.header.inclusao": "DATA REGISTRO",
   "table.header.valorTotal": "VALOR TOTAL",
   "table.header.statusPagamento": "STATUS DE PAGAMENTO",
 
@@ -74,5 +74,6 @@
   "resetPasswordDialog.toast.unexpected.error.description": "Não foi possível alterar senha!",
 
   "ticketDetails.toast.importFiles.success.message": "Arquivo anexado com sucesso.",
-  "ticketDetails.toast.importFiles.error.message": "Ouve um erro ao anexar arquivo."
+  "ticketDetails.toast.importFiles.error.message": "Ouve um erro ao anexar arquivo.",
+  "ticketDetails.toast.importFiles.error.size.message": "O arquivo selecionado ultrapassa o limite de 0.5M."
 }

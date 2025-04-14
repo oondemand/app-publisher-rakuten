@@ -55,7 +55,7 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
     }
   };
 
-  const { mutateAsync: uploadFileMutation } = useMutation({
+  const { mutateAsync: uploadFileMutation, isPending } = useMutation({
     mutationFn: async ({ files }) =>
       await TicketService.uploadFiles({ ticketId: ticket._id, files }),
     onSuccess: ({ data }) => {
@@ -165,28 +165,48 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                       );
                     })}
 
-                    <div className="w-full pt-2">
-                      <input
-                        accept="application/pdf"
-                        type="file"
-                        id="file-input"
-                        className="hidden"
-                        onChange={async (e) => {
-                          if (e.target?.files.length > 0) {
-                            await uploadFileMutation({
-                              files: [e.target.files[0]],
-                            });
-                          }
-                        }}
-                      />
+                    {ticket?.status !== "concluido" && (
+                      <div className="w-full pt-2">
+                        <input
+                          disabled={isPending}
+                          accept="application/pdf"
+                          type="file"
+                          id="file-input"
+                          className="hidden"
+                          onChange={async (e) => {
+                            if (e.target?.files.length > 0) {
+                              const file = e.target.files[0];
 
-                      <label
-                        for="file-input"
-                        className="min-w-full text-sm inline-block cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-medium py-1.5 px-4 rounded-md transition-colors duration-200"
-                      >
-                        {t("home.ticketDetails.dialog.importFiles.label")}
-                      </label>
-                    </div>
+                              // Convertendo bytes para MB
+                              const fileSizeInMB = file.size / (1024 * 1024);
+
+                              console.log(fileSizeInMB);
+
+                              if (fileSizeInMB > 0.5) {
+                                toast.error(
+                                  t(
+                                    "home.ticketDetails.toast.importFiles.error.size.message"
+                                  )
+                                );
+                                e.target.value = "";
+                                return;
+                              }
+
+                              await uploadFileMutation({
+                                files: [file],
+                              });
+                            }
+                          }}
+                        />
+
+                        <label
+                          for="file-input"
+                          className="min-w-full text-sm inline-block cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-medium py-1.5 px-4 rounded-md transition-colors duration-200"
+                        >
+                          {t("home.ticketDetails.dialog.importFiles.label")}
+                        </label>
+                      </div>
+                    )}
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>

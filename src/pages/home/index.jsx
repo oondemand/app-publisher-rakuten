@@ -18,6 +18,7 @@ import { TicketService } from "../../services/tickets";
 import { useQuery } from "@tanstack/react-query";
 import { formatCurrency } from "../../utils/currency";
 import { format } from "date-fns";
+import { formatDateToDDMMYYYY } from "../../utils/date";
 
 import "./custom-scrollbar.css";
 import { TicketDetailsDialog } from "./ticketDetailsDialog";

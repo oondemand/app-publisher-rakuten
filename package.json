@@ -1,6 +1,6 @@
 {
   "name": "app-publisher",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "type": "module",
   "scripts": {
     "release": "release-it",

@@ -169,11 +169,10 @@ export const Home = () => {
                       </TableCell>
                       <TableCell className="text-xs font-semibold text-neutral-600">
                         {ticket.dataRegistro
-                          ? format(ticket.dataRegistro, "dd/MM/yyyy")
+                          ? formatDateToDDMMYYYY(ticket.dataRegistro)
                           : ticket.servicos[0]?.dataRegistro
-                          ? format(
-                              ticket.servicos[0]?.dataRegistro,
-                              "dd/MM/yyyy"
+                          ? formatDateToDDMMYYYY(
+                              ticket.servicos[0]?.dataRegistro
                             )
                           : "-"}
                       </TableCell>

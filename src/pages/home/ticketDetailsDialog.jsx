@@ -107,17 +107,15 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                     <CircleCheckBig size={14} /> {t("home.badge.pago")}
                   </Badge>
                 )}
-              {ticket && ticket?.etapa === "integracao-omie" && (
+              {/* {ticket && ticket?.etapa === "integracao-omie" && (
                 <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
                   <Clock size={14} /> {t("home.badge.pendente")}
                 </Badge>
-              )}
+              )} */}
               {ticket &&
                 ticket?.etapa &&
-                !["requisicao", "concluido", "integracao-omie"].includes(
-                  ticket.etapa
-                ) && (
-                  <Badge className="rounded-2xl bg-orange-200 text-orange-500 hover:bg-orange-300 flex gap-2 items-center">
+                !["requisicao", "concluido"].includes(ticket.etapa) && (
+                  <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
                     <RefreshCcw size={14} />
                     {t("home.badge.processando")}
                   </Badge>
@@ -135,7 +133,6 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
               <Accordion
                 type="single"
                 collapsible
-                defaultValue="item-1"
                 className="border-none outline-none"
               >
                 <AccordionItem value="item-1">
@@ -165,7 +162,8 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                       );
                     })}
 
-                    {ticket?.status !== "concluido" && (
+                    {(ticket?.status !== "concluido" ||
+                      ticket?.etapa !== "concluido") && (
                       <div className="w-full pt-2">
                         <input
                           disabled={isPending}

@@ -6,19 +6,17 @@ import { Login } from "./pages/login";
 import { Home } from "./pages/home";
 
 import { RecoverPassword } from "./pages/recover-password/index.jsx";
+import { TaxDocuments } from "./pages/tax-documents/index.jsx";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <AuthLayout />,
     children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
+      { path: "/", element: <Home /> },
+      { path: "/tax-documents", element: <TaxDocuments /> },
     ],
   },
-
   {
     path: "/",
     element: <MainLayout />,

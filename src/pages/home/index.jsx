@@ -1,6 +1,6 @@
 import { useAuth } from "../../hooks/auth";
 import { useState } from "react";
-import { Dropdown } from "./dropdown";
+import { Dropdown } from "../_layouts/dropdown";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import {
@@ -12,7 +12,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { CircleCheckBig, RefreshCcw, Clock } from "lucide-react";
+import {
+  CircleCheckBig,
+  RefreshCcw,
+  Clock,
+  FileUser,
+  FileText,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { TicketService } from "../../services/tickets";
 import { useQuery } from "@tanstack/react-query";
@@ -23,6 +29,7 @@ import { formatDateToDDMMYYYY } from "../../utils/date";
 import "./custom-scrollbar.css";
 import { TicketDetailsDialog } from "./ticketDetailsDialog";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 export const addTotalValueOfServices = (services) => {
   return services.reduce((acc, curr) => acc + curr.valor, 0);
@@ -51,10 +58,18 @@ export const Home = () => {
 
   return (
     <div className="flex flex-col max-h-screen pb-24">
-      <div className="px-3 py-3 flex items-center justify-between shadow-sm">
+      {/* <div className="px-3 py-3 flex items-center justify-between shadow-sm">
         <img width={84} height={23} src="/logo_rakuten_purple.png" />
-        <Dropdown />
-      </div>
+        <div className="flex items-end gap-1">
+          <Link
+            to="/tax-documents"
+            className="text-zinc-500 rounded-full bg-zinc-50 p-1"
+          >
+            <FileText size={19} />
+          </Link>
+          <Dropdown />
+        </div>
+      </div> */}
       <div className="px-6 py-4">
         <h1 className="text-left font-bold text-brand-500 text-2xl">
           {t("home.header.greeting", { nome: user.nome })}

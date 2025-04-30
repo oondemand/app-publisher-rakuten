@@ -5,8 +5,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { DoorOpen, UserRound } from "lucide-react";
-import { ResetPasswordDialog } from "./dialog";
+import { DoorClosed, DoorOpen, FileText, UserRound } from "lucide-react";
+import { ResetPasswordDialog } from "../home/dialog";
 
 import { useAuth } from "../../hooks/auth";
 import { useTranslation } from "react-i18next";
@@ -21,6 +21,7 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { UserService } from "../../services/user";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 export const Dropdown = () => {
   const { logout } = useAuth();

@@ -25,15 +25,37 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { CurrencyInput } from "@/components/form/currency-input";
+import { requiredCurrencyValidation } from "@/utils/currency";
+import { CompetenceInput } from "../../components/form/competence-input";
+import { SelectInput } from "../../components/form/select";
+import { api } from "../../config/api";
+import { useQuery } from "@tanstack/react-query";
 
 const taxDocumentsSchema = z.object({
   file: z.instanceof(File, { message: "O arquivo é obrigatório" }),
   numero: z.string().nonempty({ message: "O número é obrigatório" }),
   tipoDocumentoFiscal: z.string().nonempty({ message: "O tipo é obrigatório" }),
-  valor: z.coerce.number({ message: "O valor é obrigatório" }),
+  valor: requiredCurrencyValidation,
   observacaoPrestador: z.string().optional(),
   descricao: z.string().optional(),
-  competencia: z.string().optional(),
+  competencia: z
+    .string()
+    .refine(
+      (value) => {
+        if (!value) return true;
+        if (value.includes("_")) return false;
+
+        const [mes, ano] = value.split("/");
+        const mesNum = parseInt(mes);
+
+        return mesNum >= 1 && mesNum <= 12 && ano.length === 4 && ano >= 1500;
+      },
+      {
+        message: "Data de competência inválida",
+      }
+    )
+    .optional(),
 });
 
 export const TaxDocumentsDialog = () => {
@@ -71,10 +93,26 @@ export const TaxDocumentsDialog = () => {
     },
   });
 
-  const onSubmit = async (data) => {
-    console.log("data", data);
-    await criarDocumentoFiscalMutation({ body: data });
+  const onSubmit = async (values) => {
+    if (values?.competencia !== "") {
+      const [mes, ano] = values.competencia.split("/");
+
+      values.mes = Number(mes);
+      values.ano = Number(ano);
+    }
+
+    delete values.competencia;
+
+    await criarDocumentoFiscalMutation({
+      body: values,
+    });
   };
+
+  const { data: tiposDocumentoFiscal } = useQuery({
+    queryKey: ["tipos-documento-fiscal"],
+    queryFn: async () => api.get("/listas/tipo-documento-fiscal"),
+    staleTime: Infinity,
+  });
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -112,7 +150,6 @@ export const TaxDocumentsDialog = () => {
                         <FormControl>
                           <Input
                             type="file"
-                            // placeholder={}
                             onChange={(e) => {
                               field.onChange(e.target.files[0]);
                             }}
@@ -133,7 +170,7 @@ export const TaxDocumentsDialog = () => {
                     label="Número"
                   />
 
-                  <TextInput
+                  <CurrencyInput
                     required={true}
                     control={form.control}
                     name="valor"
@@ -142,14 +179,20 @@ export const TaxDocumentsDialog = () => {
                 </div>
 
                 <div className="flex gap-2">
-                  <TextInput
+                  <SelectInput
                     required={true}
                     control={form.control}
                     name="tipoDocumentoFiscal"
                     label="Tipo"
+                    options={tiposDocumentoFiscal?.data?.valores?.map(
+                      (item) => ({
+                        value: item?.valor,
+                        label: (item?.chave ?? item?.valor).toUpperCase(),
+                      })
+                    )}
                   />
 
-                  <TextInput
+                  <CompetenceInput
                     control={form.control}
                     name="competencia"
                     label="Competência"

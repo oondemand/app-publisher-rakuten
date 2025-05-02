@@ -109,11 +109,6 @@ export const Home = () => {
           {t("home.header.notFound")}
         </div>
       )}
-      {/* {error && !isLoading && (
-        <div className="px-6 font-semibold text-zinc-400">
-          {t("home.header.errorLoading")}
-        </div>
-      )} */}
 
       {data && data.tickets.length > 0 && (
         <div className="px-6 flex-grow overflow-y-scroll custom-scrollbar relative transition-all">
@@ -153,17 +148,11 @@ export const Home = () => {
                             <CircleCheckBig size={14} /> {t("home.badge.pago")}
                           </Badge>
                         )}
-                        {/* {ticket.etapa === "integracao-omie" && (
-                          <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
-                            <Clock size={14} /> {t("home.badge.pendente")}
-                          </Badge>
-                        )} */}
+
                         {ticket?.etapa &&
-                          ![
-                            "requisicao",
-                            "concluido",
-                            // "integracao-omie",
-                          ].includes(ticket.etapa) && (
+                          !["requisicao", "concluido"].includes(
+                            ticket.etapa
+                          ) && (
                             <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
                               <RefreshCcw size={14} />
                               {t("home.badge.processando")}
@@ -172,8 +161,8 @@ export const Home = () => {
                       </TableCell>
                       <TableCell className="text-xs font-semibold text-neutral-600">
                         {ticket.dataRegistro
-                          ? formatDateToDDMMYYYY(ticket.dataRegistro)
-                          : ticket.servicos[0]?.dataRegistro
+                          ? formatDateToDDMMYYYY(ticket?.dataRegistro)
+                          : ticket?.servicos[0]?.dataRegistro
                           ? formatDateToDDMMYYYY(
                               ticket.servicos[0]?.dataRegistro
                             )

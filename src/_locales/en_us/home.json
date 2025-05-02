@@ -30,6 +30,7 @@
   "ticketDetails.table.head.label.valor": "Amount",
 
   "ticketDetails.dialog.header.arquivo": "Files",
+  "ticketDetails.dialog.header.documentosFiscais": "Tax documents",
 
   "ticketDetails.dialog.popover.valores.principal": "Main values:",
 "ticketDetails.dialog.popover.valores.revisao": "Review Values",

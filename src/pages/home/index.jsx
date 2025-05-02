@@ -18,6 +18,7 @@ import {
   Clock,
   FileUser,
   FileText,
+  Circle,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { TicketService } from "../../services/tickets";
@@ -26,7 +27,6 @@ import { formatCurrency } from "../../utils/currency";
 import { format } from "date-fns";
 import { formatDateToDDMMYYYY } from "../../utils/date";
 
-import "./custom-scrollbar.css";
 import { TicketDetailsDialog } from "./ticketDetailsDialog";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -58,18 +58,6 @@ export const Home = () => {
 
   return (
     <div className="flex flex-col max-h-screen pb-24">
-      {/* <div className="px-3 py-3 flex items-center justify-between shadow-sm">
-        <img width={84} height={23} src="/logo_rakuten_purple.png" />
-        <div className="flex items-end gap-1">
-          <Link
-            to="/tax-documents"
-            className="text-zinc-500 rounded-full bg-zinc-50 p-1"
-          >
-            <FileText size={19} />
-          </Link>
-          <Dropdown />
-        </div>
-      </div> */}
       <div className="px-6 py-4">
         <h1 className="text-left font-bold text-brand-500 text-2xl">
           {t("home.header.greeting", { nome: user.nome })}
@@ -155,8 +143,7 @@ export const Home = () => {
                       <TableCell className="text-xs flex gap-2">
                         {ticket.status === "aberto" && !ticket?.etapa && (
                           <Badge className="rounded-2xl  bg-zinc-100 text-zinc-500 hover:bg-zinc-200 flex gap-2 items-center">
-                            <CircleCheckBig size={14} />{" "}
-                            {t("home.badge.aberto")}
+                            <Circle size={14} /> {t("home.badge.aberto")}
                           </Badge>
                         )}
                         {((ticket.status === "concluido" &&

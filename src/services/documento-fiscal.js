@@ -19,6 +19,12 @@ const criarDocumentoFiscal = async ({ body }) => {
   return data;
 };
 
+const getDocumentosFiscais = async () => {
+  const { data } = await api.get(`/documentos-fiscais/prestador`);
+  return data;
+};
+
 export const DocumentoFiscalService = {
   criarDocumentoFiscal,
+  getDocumentosFiscais,
 };

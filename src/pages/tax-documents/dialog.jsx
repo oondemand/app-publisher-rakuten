@@ -31,13 +31,13 @@ import { CompetenceInput } from "../../components/form/competence-input";
 import { SelectInput } from "../../components/form/select";
 import { api } from "../../config/api";
 import { useQuery } from "@tanstack/react-query";
+import { queryClient } from "../../config/react-query";
 
 const taxDocumentsSchema = z.object({
   file: z.instanceof(File, { message: "O arquivo é obrigatório" }),
   numero: z.string().nonempty({ message: "O número é obrigatório" }),
   tipoDocumentoFiscal: z.string().nonempty({ message: "O tipo é obrigatório" }),
   valor: requiredCurrencyValidation,
-  observacaoPrestador: z.string().optional(),
   descricao: z.string().optional(),
   competencia: z
     .string()
@@ -67,10 +67,7 @@ export const TaxDocumentsDialog = () => {
       file: null,
       numero: "",
       tipoDocumentoFiscal: "",
-      dataEmissao: "",
-      dataVencimento: "",
       valor: "",
-      observacaoPrestador: "",
       descricao: "",
       competencia: "",
     },
@@ -84,6 +81,7 @@ export const TaxDocumentsDialog = () => {
 
     onSuccess: () => {
       toast.success("Documento fiscal criado com sucesso");
+      queryClient.invalidateQueries({ queryKey: ["list-documentos-fiscais"] });
       setOpen(false);
       form.reset();
     },
@@ -117,9 +115,9 @@ export const TaxDocumentsDialog = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="mt-4 text-zinc-500">
-          <PlusIcon size={16} />
-          <span className="text-sm mt-0.5 ">Novo documento fiscal</span>
+        <Button className="mt-4 px-2 h-[30px] focus-visible:ring-0 bg-zinc-100 hover:bg-zinc-200 text-zinc-500">
+          <PlusIcon size={14} />
+          <span className="text-xs mt-0.5">Novo documento fiscal</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[390px] rounded-lg px-1 border-none bg-transparent">
@@ -145,7 +143,7 @@ export const TaxDocumentsDialog = () => {
                     return (
                       <FormItem>
                         <FormLabel className="text-brand-500">
-                          Arquivo
+                          Arquivo *
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -203,12 +201,6 @@ export const TaxDocumentsDialog = () => {
                   control={form.control}
                   name="descricao"
                   label="Descrição"
-                />
-
-                <TextInput
-                  control={form.control}
-                  name="observacaoPrestador"
-                  label="Observação"
                 />
 
                 <div className="pt-4" />

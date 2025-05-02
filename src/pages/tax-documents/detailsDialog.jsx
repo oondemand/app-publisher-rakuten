@@ -80,7 +80,7 @@ export const TaxDocumentsDetailsDialog = ({
                 </Badge>
               )}
               {taxDocument?.statusValidacao === "pendente" && (
-                <Badge className="rounded-2xl  bg-zinc-100 text-zinc-500 hover:bg-zinc-200 flex gap-2 items-center">
+                <Badge className="rounded-2xl  bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
                   <RefreshCcw size={12} /> pendente
                 </Badge>
               )}

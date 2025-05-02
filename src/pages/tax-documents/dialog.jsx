@@ -115,7 +115,7 @@ export const TaxDocumentsDialog = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="mt-4 px-2 h-[30px] focus-visible:ring-0 bg-zinc-100 hover:bg-zinc-200 text-zinc-500">
+        <Button className="mt-4 px-2 h-[30px] rounded-md focus-visible:ring-0 bg-zinc-100 hover:bg-zinc-200 text-zinc-500">
           <PlusIcon size={14} />
           <span className="text-xs mt-0.5">Novo documento fiscal</span>
         </Button>

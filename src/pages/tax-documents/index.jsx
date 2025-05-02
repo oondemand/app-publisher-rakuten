@@ -9,7 +9,7 @@ export const TaxDocuments = () => {
     <div className="flex flex-col max-h-screen pb-24">
       <div className="px-6 pt-4">
         <h1 className="text-left font-bold text-brand-500 text-2xl">
-          Documentos fiscais
+          {t("taxDocuments.header.title")}
         </h1>
         <TaxDocumentsDialog />
       </div>

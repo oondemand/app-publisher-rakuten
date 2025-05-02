@@ -32,12 +32,21 @@ import { SelectInput } from "../../components/form/select";
 import { api } from "../../config/api";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../config/react-query";
+import { useTranslation } from "react-i18next";
 
 const taxDocumentsSchema = z.object({
-  file: z.instanceof(File, { message: "O arquivo é obrigatório" }),
-  numero: z.string().nonempty({ message: "O número é obrigatório" }),
-  tipoDocumentoFiscal: z.string().nonempty({ message: "O tipo é obrigatório" }),
-  valor: requiredCurrencyValidation,
+  file: z.instanceof(File, {
+    message: "taxDocuments.validation.form.arquivo.required",
+  }),
+  numero: z
+    .string()
+    .nonempty({ message: "taxDocuments.validation.form.numero.required" }),
+  tipoDocumentoFiscal: z
+    .string()
+    .nonempty({ message: "taxDocuments.validation.form.tipo.required" }),
+  valor: requiredCurrencyValidation({
+    message: "taxDocuments.validation.form.valor.required",
+  }),
   descricao: z.string().optional(),
   competencia: z
     .string()
@@ -52,7 +61,7 @@ const taxDocumentsSchema = z.object({
         return mesNum >= 1 && mesNum <= 12 && ano.length === 4 && ano >= 1500;
       },
       {
-        message: "Data de competência inválida",
+        message: "taxDocuments.validation.form.competencia.invalid",
       }
     )
     .optional(),
@@ -60,6 +69,7 @@ const taxDocumentsSchema = z.object({
 
 export const TaxDocumentsDialog = () => {
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
 
   const form = useForm({
     resolver: zodResolver(taxDocumentsSchema),
@@ -80,14 +90,14 @@ export const TaxDocumentsDialog = () => {
       }),
 
     onSuccess: () => {
-      toast.success("Documento fiscal criado com sucesso");
+      toast.success(t("taxDocuments.dialog.form.toast.success"));
       queryClient.invalidateQueries({ queryKey: ["list-documentos-fiscais"] });
       setOpen(false);
       form.reset();
     },
 
     onError: () => {
-      toast.error("Erro ao criar documento fiscal");
+      toast.error(t("taxDocuments.dialog.form.toast.error"));
     },
   });
 
@@ -117,17 +127,19 @@ export const TaxDocumentsDialog = () => {
       <DialogTrigger asChild>
         <Button className="mt-4 px-2 h-[30px] rounded-md focus-visible:ring-0 bg-zinc-100 hover:bg-zinc-200 text-zinc-500">
           <PlusIcon size={14} />
-          <span className="text-xs mt-0.5">Novo documento fiscal</span>
+          <span className="text-xs mt-0.5">
+            {t("taxDocuments.dialog.form.button.label")}
+          </span>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[390px] rounded-lg px-1 border-none bg-transparent">
         <div className="bg-white rounded-lg p-4">
           <DialogHeader>
             <DialogTitle className="text-center text-lg text-brand-500">
-              Documento fiscal
+              {t("taxDocuments.dialog.form.title")}
             </DialogTitle>
             <DialogDescription className="text-center text-base px-8">
-              Adicione um novo documento fiscal
+              {t("taxDocuments.dialog.form.description")}
             </DialogDescription>
           </DialogHeader>
           <div className="pt-4 pb-2">
@@ -143,7 +155,7 @@ export const TaxDocumentsDialog = () => {
                     return (
                       <FormItem>
                         <FormLabel className="text-brand-500">
-                          Arquivo *
+                          {t("taxDocuments.dialog.form.arquivo.label")} *
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -165,14 +177,14 @@ export const TaxDocumentsDialog = () => {
                     required={true}
                     control={form.control}
                     name="numero"
-                    label="Número"
+                    label={t("taxDocuments.dialog.form.numero.label")}
                   />
 
                   <CurrencyInput
                     required={true}
                     control={form.control}
                     name="valor"
-                    label="Valor"
+                    label={t("taxDocuments.dialog.form.valor.label")}
                   />
                 </div>
 
@@ -181,7 +193,8 @@ export const TaxDocumentsDialog = () => {
                     required={true}
                     control={form.control}
                     name="tipoDocumentoFiscal"
-                    label="Tipo"
+                    label={t("taxDocuments.dialog.form.tipo.label")}
+                    placeholder={t("taxDocuments.dialog.form.tipo.placeholder")}
                     options={tiposDocumentoFiscal?.data?.valores?.map(
                       (item) => ({
                         value: item?.valor,
@@ -193,14 +206,14 @@ export const TaxDocumentsDialog = () => {
                   <CompetenceInput
                     control={form.control}
                     name="competencia"
-                    label="Competência"
+                    label={t("taxDocuments.dialog.form.competencia.label")}
                   />
                 </div>
 
                 <TextInput
                   control={form.control}
                   name="descricao"
-                  label="Descrição"
+                  label={t("taxDocuments.dialog.form.descricao.label")}
                 />
 
                 <div className="pt-4" />
@@ -210,7 +223,7 @@ export const TaxDocumentsDialog = () => {
                   className="w-full bg-sky-500 hover:bg-sky-600"
                   type="submit"
                 >
-                  Salvar
+                  {t("taxDocuments.dialog.form.button.label")}
                 </Button>
               </form>
             </Form>

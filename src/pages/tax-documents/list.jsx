@@ -24,7 +24,6 @@ export const addTotalValueOfServices = (services) => {
 
 export const TaxDocumentsList = () => {
   const { t } = useTranslation();
-  const { user } = useAuth();
 
   const [taxDocumentsDetails, setTaxDocumentsDetails] = useState({
     open: false,
@@ -49,11 +48,13 @@ export const TaxDocumentsList = () => {
       <div className="pb-4" />
       {isLoading && (
         <div className="px-6 font-semibold animate-pulse text-zinc-400">
-          Loading...
+          {t("taxDocuments.header.loadingTaxDocuments")}
         </div>
       )}
       {((!data && !isLoading) || data?.length === 0) && (
-        <div className="px-6 font-semibold text-zinc-400">Not found</div>
+        <div className="px-6 font-semibold text-zinc-400">
+          {t("taxDocuments.header.notFoundTaxDocuments")}
+        </div>
       )}
 
       {data && data.length > 0 && (
@@ -61,16 +62,20 @@ export const TaxDocumentsList = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-[11px] p-1 h-0">Status</TableHead>
-                <TableHead className="text-[11px] p-1 h-0">Numero</TableHead>
-                {/* <TableHead className="text-[11px] p-1 h-0">Valor</TableHead> */}
+                <TableHead className="text-[11px] p-1 h-0">
+                  {t("taxDocuments.table.header.status")}
+                </TableHead>
+                <TableHead className="text-[11px] p-1 h-0">
+                  {t("taxDocuments.table.header.numero")}
+                </TableHead>
+                {/* <TableHead className="text-[11px] p-1 h-0">
+                  {t("taxDocuments.table.header.valor")}
+                </TableHead> */}
               </TableRow>
             </TableHeader>
 
             <TableBody>
               {data.map((item, i) => {
-                console.log("item", item);
-
                 return (
                   <TableRow
                     onClick={() => handleOpenTaxDocumentsDetails(item)}
@@ -79,38 +84,42 @@ export const TaxDocumentsList = () => {
                     <TableCell className="text-xs flex flex-wrap gap-1">
                       {item?.status === "aberto" && (
                         <Badge className="rounded-2xl  bg-zinc-100 text-zinc-500 hover:bg-zinc-200 flex gap-2 items-center">
-                          <Circle size={12} /> aberto
+                          <Circle size={12} /> {t("taxDocuments.badge.aberto")}
                         </Badge>
                       )}
 
                       {item?.status === "pago" && (
                         <Badge className="rounded-2xl  bg-emerald-100 text-green-500 hover:bg-emerald-200 flex gap-2 items-center">
-                          <CircleCheckBig size={12} /> pago
+                          <CircleCheckBig size={12} />{" "}
+                          {t("taxDocuments.badge.pago")}
                         </Badge>
                       )}
 
                       {item?.status === "processando" && (
                         <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
                           <RefreshCcw size={12} />
-                          processando
+                          {t("taxDocuments.badge.processando")}
                         </Badge>
                       )}
 
                       {item?.statusValidacao === "pendente" && (
                         <Badge className="rounded-2xl  bg-violet-200 text-violet-500 hover:bg-violet-3  00 flex gap-2 items-center">
-                          <RefreshCcw size={12} /> pendente
+                          <RefreshCcw size={12} />{" "}
+                          {t("taxDocuments.badge.pendente")}
                         </Badge>
                       )}
 
                       {item?.statusValidacao === "aprovado" && (
                         <Badge className="rounded-2xl  bg-emerald-100 text-green-500 hover:bg-emerald-200 flex gap-2 items-center">
-                          <CircleCheckBig size={12} /> aprovado
+                          <CircleCheckBig size={12} />{" "}
+                          {t("taxDocuments.badge.aprovado")}
                         </Badge>
                       )}
 
                       {item?.statusValidacao === "recusado" && (
                         <Badge className="rounded-2xl  bg-red-100 text-red-500 hover:bg-red-200 flex gap-2 items-center">
-                          <CircleX size={12} /> recusado
+                          <CircleX size={12} />{" "}
+                          {t("taxDocuments.badge.recusado")}
                         </Badge>
                       )}
                     </TableCell>

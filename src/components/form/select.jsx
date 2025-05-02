@@ -21,6 +21,7 @@ export const SelectInput = ({
   label,
   required = false,
   options,
+  placeholder,
 }) => {
   const { t } = useTranslation();
 
@@ -37,7 +38,7 @@ export const SelectInput = ({
             <FormControl>
               <Select onValueChange={field.onChange}>
                 <SelectTrigger className="min-w-[170px] h-[36px]">
-                  <SelectValue placeholder="Selecione uma opção" />
+                  <SelectValue placeholder={t(placeholder)} />
                 </SelectTrigger>
                 <SelectContent>
                   {options.map((option) => (

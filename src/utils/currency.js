@@ -9,23 +9,25 @@ export const formatCurrency = (number) => {
   }).format(Number(number.toFixed(2)));
 };
 
-export const requiredCurrencyValidation = z.coerce
-  .string()
-  .nonempty("Campo obrigatório")
-  .transform((value) => {
-    const isNegative = value.includes("-");
-    const isCurrencyString = value.includes("R$");
+export const requiredCurrencyValidation = ({ message }) => {
+  return z.coerce
+    .string()
+    .nonempty(message)
+    .transform((value) => {
+      const isNegative = value.includes("-");
+      const isCurrencyString = value.includes("R$");
 
-    const numericString = isCurrencyString
-      ? value
-          .replaceAll(".", "-")
-          .replaceAll("R$", "")
-          .replaceAll(",", ".")
-          .replaceAll("-", "")
-          .trim()
-      : value.replaceAll("-", "");
+      const numericString = isCurrencyString
+        ? value
+            .replaceAll(".", "-")
+            .replaceAll("R$", "")
+            .replaceAll(",", ".")
+            .replaceAll("-", "")
+            .trim()
+        : value.replaceAll("-", "");
 
-    const numero = Number(numericString);
+      const numero = Number(numericString);
 
-    return isNegative ? -numero : numero;
-  });
+      return isNegative ? -numero : numero;
+    });
+};

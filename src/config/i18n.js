@@ -9,6 +9,7 @@ import enUsRecoverPassword from "../_locales/en_us/recoverPassword.json";
 
 import enUsHome from "../_locales/en_us/home.json";
 import ptBrHome from "../_locales/pt_br/home.json";
+import ptBrTaxDocuments from "../_locales/pt_br/taxDocuments.json";
 
 function loadInitialLanguage() {
   const localStorageLang = localStorage.getItem("@app-publisher-language");
@@ -41,6 +42,7 @@ i18n.use(initReactI18next).init({
         login: ptBrLogin,
         recoverPassword: ptBrRecoverPassword,
         home: ptBrHome,
+        taxDocuments: ptBrTaxDocuments,
       },
     },
   },

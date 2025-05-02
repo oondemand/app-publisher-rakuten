@@ -223,7 +223,7 @@ export const TaxDocumentsDialog = () => {
                   className="w-full bg-sky-500 hover:bg-sky-600"
                   type="submit"
                 >
-                  {t("taxDocuments.dialog.form.button.label")}
+                  {t("taxDocuments.dialog.form.button.submit.label")}
                 </Button>
               </form>
             </Form>

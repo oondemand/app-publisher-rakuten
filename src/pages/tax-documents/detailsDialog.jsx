@@ -56,67 +56,71 @@ export const TaxDocumentsDetailsDialog = ({
         <div className="bg-white rounded-lg p-4">
           <DialogHeader className="text-left">
             <DialogTitle className="text-base border-b text-brand-500">
-              Detalhes do documento
+              {t("taxDocuments.dialog.details.title")}
             </DialogTitle>
           </DialogHeader>
           <div className="pb-3" />
           <div className="flex flex-col gap-2">
             <span className="flex gap-2.5 font-semibold text-zinc-600">
-              Status{" "}
+              {t("taxDocuments.dialog.details.status.label")}{" "}
               {taxDocument?.status === "aberto" && (
                 <Badge className="rounded-2xl  bg-zinc-100 text-zinc-500 hover:bg-zinc-200 flex gap-2 items-center">
-                  <Circle size={12} /> aberto
+                  <Circle size={12} /> {t("taxDocuments.badge.aberto")}
                 </Badge>
               )}
               {taxDocument?.status === "pago" && (
                 <Badge className="rounded-2xl  bg-emerald-100 text-green-500 hover:bg-emerald-200 flex gap-2 items-center">
-                  <CircleCheckBig size={12} /> pago
+                  <CircleCheckBig size={12} /> {t("taxDocuments.badge.pago")}
                 </Badge>
               )}
               {taxDocument?.status === "processando" && (
                 <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
                   <RefreshCcw size={12} />
-                  processando
+                  {t("taxDocuments.badge.processando")}
                 </Badge>
               )}
               {taxDocument?.statusValidacao === "pendente" && (
                 <Badge className="rounded-2xl  bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
-                  <RefreshCcw size={12} /> pendente
+                  <RefreshCcw size={12} />
+                  {t("taxDocuments.badge.pendente")}
                 </Badge>
               )}
               {taxDocument?.statusValidacao === "aprovado" && (
                 <Badge className="rounded-2xl  bg-emerald-100 text-green-500 hover:bg-emerald-200 flex gap-2 items-center">
-                  <CircleCheckBig size={12} /> aprovado
+                  <CircleCheckBig size={12} />
+                  {t("taxDocuments.badge.aprovado")}
                 </Badge>
               )}
               {taxDocument?.statusValidacao === "recusado" && (
                 <Badge className="rounded-2xl  bg-red-100 text-red-500 hover:bg-red-200 flex gap-2 items-center">
-                  <CircleX size={12} /> recusado
+                  <CircleX size={12} />
+                  {t("taxDocuments.badge.recusado")}
                 </Badge>
               )}
             </span>
             <span className="flex gap-2.5 font-semibold text-zinc-600">
-              Numero <p className="font-normal">{taxDocument?.numero}</p>
+              {t("taxDocuments.dialog.details.numero.label")}{" "}
+              <p className="font-normal">{taxDocument?.numero}</p>
             </span>
             <span className="flex gap-2.5 font-semibold text-zinc-600">
-              Valor
+              {t("taxDocuments.dialog.details.valor.label")}
               <p className="font-normal">
                 {formatCurrency(taxDocument?.valor)}
               </p>
             </span>
             <span className="flex gap-2.5 font-semibold text-zinc-600">
-              Imposto
+              {t("taxDocuments.dialog.details.imposto.label")}
               <p className="font-normal">
                 {formatCurrency(taxDocument?.imposto)}
               </p>
             </span>
             <span className="flex gap-2.5 font-semibold text-zinc-600">
-              Tipo
+              {t("taxDocuments.dialog.details.tipo.label")}
               <p className="font-normal">{taxDocument?.tipoDocumentoFiscal}</p>
             </span>
             {taxDocument?.competencia && (
               <span className="flex gap-2.5 font-semibold text-zinc-600">
-                Competência
+                {t("taxDocuments.dialog.details.competencia.label")}
                 <p className="font-normal">
                   {formatCompetence({
                     month: taxDocument?.competencia?.mes,
@@ -129,13 +133,13 @@ export const TaxDocumentsDetailsDialog = ({
             {taxDocument?.statusValidacao === "recusado" && (
               <>
                 <span className="flex gap-2.5 font-semibold text-zinc-600">
-                  Motivo da recusa
+                  {t("taxDocuments.dialog.details.motivoRecusa.label")}
                   <p className="font-normal text-zinc-600">
                     {taxDocument?.motivoRecusa}
                   </p>
                 </span>
                 <span className="font-semibold text-zinc-600">
-                  Observação{" "}
+                  {t("taxDocuments.dialog.details.observacao.label")}{" "}
                   <p className="font-normal mt-1">
                     {taxDocument?.observacaoPrestador}
                   </p>
@@ -150,7 +154,9 @@ export const TaxDocumentsDetailsDialog = ({
               className="w-full h-[35px] bg-sky-500 hover:bg-sky-600 text-white "
             >
               <Download size={16} />
-              <p className="h-[16px]">Baixar arquivo</p>
+              <p className="h-[16px]">
+                {t("taxDocuments.dialog.details.button.label")}
+              </p>
             </Button>
           </div>
         </div>

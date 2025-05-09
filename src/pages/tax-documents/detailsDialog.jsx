@@ -63,34 +63,37 @@ export const TaxDocumentsDetailsDialog = ({
           <div className="flex flex-col gap-2">
             <span className="flex gap-2.5 font-semibold text-zinc-600">
               {t("taxDocuments.dialog.details.status.label")}{" "}
-              {taxDocument?.status === "aberto" && (
-                <Badge className="rounded-2xl  bg-zinc-100 text-zinc-500 hover:bg-zinc-200 flex gap-2 items-center">
-                  <Circle size={12} /> {t("taxDocuments.badge.aberto")}
-                </Badge>
-              )}
-              {taxDocument?.status === "pago" && (
-                <Badge className="rounded-2xl  bg-emerald-100 text-green-500 hover:bg-emerald-200 flex gap-2 items-center">
-                  <CircleCheckBig size={12} /> {t("taxDocuments.badge.pago")}
-                </Badge>
-              )}
-              {taxDocument?.status === "processando" && (
-                <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
-                  <RefreshCcw size={12} />
-                  {t("taxDocuments.badge.processando")}
-                </Badge>
-              )}
+              {taxDocument?.status === "aberto" &&
+                taxDocument?.statusValidacao === "aprovado" && (
+                  <Badge className="rounded-2xl  bg-zinc-100 text-zinc-500 hover:bg-zinc-200 flex gap-2 items-center">
+                    <Circle size={12} /> {t("taxDocuments.badge.aberto")}
+                  </Badge>
+                )}
+              {taxDocument?.status === "pago" &&
+                taxDocument?.statusValidacao === "aprovado" && (
+                  <Badge className="rounded-2xl  bg-emerald-100 text-green-500 hover:bg-emerald-200 flex gap-2 items-center">
+                    <CircleCheckBig size={12} /> {t("taxDocuments.badge.pago")}
+                  </Badge>
+                )}
+              {taxDocument?.status === "processando" &&
+                taxDocument?.statusValidacao === "aprovado" && (
+                  <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
+                    <RefreshCcw size={12} />
+                    {t("taxDocuments.badge.processando")}
+                  </Badge>
+                )}
               {taxDocument?.statusValidacao === "pendente" && (
-                <Badge className="rounded-2xl  bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
+                <Badge className="rounded-2xl  bg-orange-200 text-orange-500 hover:bg-orange-300 flex gap-2 items-center">
                   <RefreshCcw size={12} />
                   {t("taxDocuments.badge.pendente")}
                 </Badge>
               )}
-              {taxDocument?.statusValidacao === "aprovado" && (
+              {/* {taxDocument?.statusValidacao === "aprovado" && (
                 <Badge className="rounded-2xl  bg-emerald-100 text-green-500 hover:bg-emerald-200 flex gap-2 items-center">
                   <CircleCheckBig size={12} />
                   {t("taxDocuments.badge.aprovado")}
                 </Badge>
-              )}
+              )} */}
               {taxDocument?.statusValidacao === "recusado" && (
                 <Badge className="rounded-2xl  bg-red-100 text-red-500 hover:bg-red-200 flex gap-2 items-center">
                   <CircleX size={12} />

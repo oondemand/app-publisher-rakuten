@@ -74,6 +74,8 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
     },
   });
 
+  console.log("ticket", ticket);
+
   return (
     <Dialog
       open={open}
@@ -107,11 +109,6 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                     <CircleCheckBig size={14} /> {t("home.badge.pago")}
                   </Badge>
                 )}
-              {/* {ticket && ticket?.etapa === "integracao-omie" && (
-                <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
-                  <Clock size={14} /> {t("home.badge.pendente")}
-                </Badge>
-              )} */}
               {ticket &&
                 ticket?.etapa &&
                 !["requisicao", "concluido"].includes(ticket.etapa) && (
@@ -178,8 +175,6 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                               // Convertendo bytes para MB
                               const fileSizeInMB = file.size / (1024 * 1024);
 
-                              console.log(fileSizeInMB);
-
                               if (fileSizeInMB > 0.5) {
                                 toast.error(
                                   t(
@@ -209,6 +204,48 @@ export const TicketDetailsDialog = ({ open, ticket, onOpenChange }) => {
                 </AccordionItem>
               </Accordion>
             )}
+            {ticket?.documentosFiscais &&
+              ticket?.documentosFiscais?.length > 0 && (
+                <Accordion
+                  type="single"
+                  collapsible
+                  className="border-none outline-none"
+                >
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger className="py-1 outline-none border-none decoration-transparent font-semibold text-zinc-600 text-base">
+                      {t("home.ticketDetails.dialog.header.documentosFiscais")}
+                    </AccordionTrigger>
+                    <AccordionContent className="space-y-2 mt-1 max-h-[95%]">
+                      {ticket?.documentosFiscais.map((e) => {
+                        return (
+                          <div
+                            key={e?._id}
+                            className="flex justify-between items-center"
+                          >
+                            <div className="font-medium text-zinc-500">
+                              {e?.tipoDocumentoFiscal?.toUpperCase()}{" "}
+                              {e?.numero} {formatCurrency(e?.valor)}
+                            </div>
+                            {e?.arquivo && (
+                              <Button
+                                onClick={async () => {
+                                  await handleDownloadArquivo({
+                                    id: e?.arquivo,
+                                  });
+                                }}
+                                variant="outline"
+                                className="size-6 rounded-lg bg-transparent border-none outline-none text-brand-500 hover:text-brand-500"
+                              >
+                                <Download />
+                              </Button>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              )}
             <span className="flex mt-1 gap-4 font-semibold text-zinc-600">
               {t("home.ticketDetails.dialog.comissoes.label")}
             </span>

@@ -1,0 +1,64 @@
+{
+  "header.title": "Documentos fiscais",
+  "addTaxDocument.button.label": "Novo documento fiscal",
+
+  "header.loadingTaxDocuments": "Buscando documentos fiscais...",
+  "header.notFoundTaxDocuments": "Não foram encontrados documentos fiscais...",
+  "header.errorLoadingTaxDocuments": "Ouve um erro ao carregar documentos fiscais...",
+
+  "table.header.numero": "NÚMERO",
+  "table.header.valor": "VALOR",
+  "table.header.status": "STATUS",
+
+  "badge.aberto": "Aberto",
+  "badge.processando": "Processando",
+  "badge.pago": "Pago",
+
+  "badge.recusado": "Recusado",
+  "badge.pendente": "Pendente",
+  "badge.aprovado": "Aprovado",
+
+  "dialog.form.title": "Documento fiscal",
+  "dialog.form.description": "Adicione um novo documento fiscal",
+
+  "dialog.form.arquivo.label": "Arquivo",
+  "dialog.form.arquivo.placeholder": "Selecione o arquivo",
+
+  "dialog.form.numero.label": "Número",
+  "dialog.form.numero.placeholder": "Digite o número",
+
+  "dialog.form.valor.label": "Valor",
+
+  "dialog.form.tipo.label": "Tipo",
+  "dialog.form.tipo.placeholder": "Selecione uma opção",
+
+  "dialog.form.competencia.label": "Competência",
+  "dialog.form.descricao.label": "Descrição",
+
+  "dialog.form.button.label": "Novo documento fiscal",
+  "dialog.form.button.submit.label": "Salvar",
+
+
+  "dialog.form.toast.success": "Documento fiscal salvo com sucesso!",
+  "dialog.form.toast.error": "Ouve um erro ao salvar o documento fiscal!",
+
+  "validation.form.arquivo.required": "O arquivo é obrigatório!",
+  "validation.form.numero.required": "O número é obrigatório!",
+  "validation.form.tipo.required": "O tipo é obrigatório!",
+  "validation.form.valor.required": "O valor é obrigatório!",
+  "validation.form.competencia.invalid": "Data de competência inválida",
+
+  "dialog.details.title": "Detalhes do documento fiscal",
+
+  "dialog.details.status.label": "Status",
+  "dialog.details.numero.label": "Número",
+  "dialog.details.valor.label": "Valor",
+  "dialog.details.imposto.label": "Imposto",
+  "dialog.details.tipo.label": "Tipo",
+  "dialog.details.competencia.label": "Competência",
+  "dialog.details.descricao.label": "Descrição",
+  "dialog.details.motivoRecusa.label": "Motivo da recusa",
+  "dialog.details.observacao.label": "Observação",
+
+  "dialog.details.button.label": "Baixar documento"
+}

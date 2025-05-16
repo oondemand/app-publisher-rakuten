@@ -1,6 +1,6 @@
 import { useAuth } from "../../hooks/auth";
 import { useState } from "react";
-import { Dropdown } from "./dropdown";
+import { Dropdown } from "../_layouts/dropdown";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import {
@@ -12,7 +12,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { CircleCheckBig, RefreshCcw, Clock } from "lucide-react";
+import {
+  CircleCheckBig,
+  RefreshCcw,
+  Clock,
+  FileUser,
+  FileText,
+  Circle,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { TicketService } from "../../services/tickets";
 import { useQuery } from "@tanstack/react-query";
@@ -20,9 +27,9 @@ import { formatCurrency } from "../../utils/currency";
 import { format } from "date-fns";
 import { formatDateToDDMMYYYY } from "../../utils/date";
 
-import "./custom-scrollbar.css";
 import { TicketDetailsDialog } from "./ticketDetailsDialog";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 export const addTotalValueOfServices = (services) => {
   return services.reduce((acc, curr) => acc + curr.valor, 0);
@@ -51,10 +58,6 @@ export const Home = () => {
 
   return (
     <div className="flex flex-col max-h-screen pb-24">
-      <div className="px-3 py-3 flex items-center justify-between shadow-sm">
-        <img width={84} height={23} src="/logo_rakuten_purple.png" />
-        <Dropdown />
-      </div>
       <div className="px-6 py-4">
         <h1 className="text-left font-bold text-brand-500 text-2xl">
           {t("home.header.greeting", { nome: user.nome })}
@@ -106,11 +109,6 @@ export const Home = () => {
           {t("home.header.notFound")}
         </div>
       )}
-      {/* {error && !isLoading && (
-        <div className="px-6 font-semibold text-zinc-400">
-          {t("home.header.errorLoading")}
-        </div>
-      )} */}
 
       {data && data.tickets.length > 0 && (
         <div className="px-6 flex-grow overflow-y-scroll custom-scrollbar relative transition-all">
@@ -140,8 +138,7 @@ export const Home = () => {
                       <TableCell className="text-xs flex gap-2">
                         {ticket.status === "aberto" && !ticket?.etapa && (
                           <Badge className="rounded-2xl  bg-zinc-100 text-zinc-500 hover:bg-zinc-200 flex gap-2 items-center">
-                            <CircleCheckBig size={14} />{" "}
-                            {t("home.badge.aberto")}
+                            <Circle size={14} /> {t("home.badge.aberto")}
                           </Badge>
                         )}
                         {((ticket.status === "concluido" &&
@@ -151,17 +148,11 @@ export const Home = () => {
                             <CircleCheckBig size={14} /> {t("home.badge.pago")}
                           </Badge>
                         )}
-                        {/* {ticket.etapa === "integracao-omie" && (
-                          <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
-                            <Clock size={14} /> {t("home.badge.pendente")}
-                          </Badge>
-                        )} */}
+
                         {ticket?.etapa &&
-                          ![
-                            "requisicao",
-                            "concluido",
-                            // "integracao-omie",
-                          ].includes(ticket.etapa) && (
+                          !["requisicao", "concluido"].includes(
+                            ticket.etapa
+                          ) && (
                             <Badge className="rounded-2xl bg-violet-200 text-violet-500 hover:bg-violet-300 flex gap-2 items-center">
                               <RefreshCcw size={14} />
                               {t("home.badge.processando")}
@@ -170,8 +161,8 @@ export const Home = () => {
                       </TableCell>
                       <TableCell className="text-xs font-semibold text-neutral-600">
                         {ticket.dataRegistro
-                          ? formatDateToDDMMYYYY(ticket.dataRegistro)
-                          : ticket.servicos[0]?.dataRegistro
+                          ? formatDateToDDMMYYYY(ticket?.dataRegistro)
+                          : ticket?.servicos[0]?.dataRegistro
                           ? formatDateToDDMMYYYY(
                               ticket.servicos[0]?.dataRegistro
                             )

@@ -1,0 +1,63 @@
+{
+  "header.title": "Tax Documents",
+  "addTaxDocument.button.label": "New Tax Document",
+
+  "header.loadingTaxDocuments": "Fetching tax documents...",
+  "header.notFoundTaxDocuments": "No tax documents found...",
+  "header.errorLoadingTaxDocuments": "An error occurred while loading tax documents...",
+
+  "table.header.numero": "NUMBER",
+  "table.header.valor": "AMOUNT",
+  "table.header.status": "STATUS",
+
+  "badge.aberto": "Open",
+  "badge.processando": "Processing",
+  "badge.pago": "Paid",
+
+  "badge.recusado": "Rejected",
+  "badge.pendente": "Pending",
+  "badge.aprovado": "Approved",
+
+  "dialog.form.title": "Tax Document",
+  "dialog.form.description": "Add a new tax document",
+
+  "dialog.form.arquivo.label": "File",
+  "dialog.form.arquivo.placeholder": "Select file",
+
+  "dialog.form.numero.label": "Number",
+  "dialog.form.numero.placeholder": "Enter number",
+
+  "dialog.form.valor.label": "Amount",
+
+  "dialog.form.tipo.label": "Type",
+  "dialog.form.tipo.placeholder": "Select an option",
+
+  "dialog.form.competencia.label": "Reference Period",
+  "dialog.form.descricao.label": "Description",
+
+  "dialog.form.button.label": "New Tax Document",
+  "dialog.form.button.submit.label": "Save",
+
+  "dialog.form.toast.success": "Tax document saved successfully!",
+  "dialog.form.toast.error": "An error occurred while saving the tax document!",
+
+  "validation.form.arquivo.required": "File is required!",
+  "validation.form.numero.required": "Number is required!",
+  "validation.form.tipo.required": "Type is required!",
+  "validation.form.valor.required": "Amount is required!",
+  "validation.form.competencia.invalid": "Invalid reference period date",
+
+  "dialog.details.title": "Tax Document Details",
+
+  "dialog.details.status.label": "Status",
+  "dialog.details.numero.label": "Number",
+  "dialog.details.valor.label": "Amount",
+  "dialog.details.imposto.label": "Tax",
+  "dialog.details.tipo.label": "Type",
+  "dialog.details.competencia.label": "Reference Period",
+  "dialog.details.descricao.label": "Description",
+  "dialog.details.motivoRecusa.label": "Rejection Reason",
+  "dialog.details.observacao.label": "Note",
+
+  "dialog.details.button.label": "Download Document"
+}

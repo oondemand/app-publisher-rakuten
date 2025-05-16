@@ -31,6 +31,7 @@
   "ticketDetails.table.head.label.valor": "Valor",
 
   "ticketDetails.dialog.header.arquivo": "Arquivos",
+  "ticketDetails.dialog.header.documentosFiscais": "Documentos fiscais",
 
   "ticketDetails.dialog.popover.valores.principal": "Valor principal:",
   "ticketDetails.dialog.popover.valores.revisao": "Valores de revisão",

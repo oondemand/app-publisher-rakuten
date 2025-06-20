@@ -24,13 +24,10 @@
   "dialog.form.arquivo.label": "File",
   "dialog.form.arquivo.placeholder": "Select file",
 
-  "dialog.form.numero.label": "Number",
+  "dialog.form.numero.label": "Document number",
   "dialog.form.numero.placeholder": "Enter number",
 
   "dialog.form.valor.label": "Amount",
-
-  "dialog.form.tipo.label": "Type",
-  "dialog.form.tipo.placeholder": "Select an option",
 
   "dialog.form.competencia.label": "Reference Period",
   "dialog.form.descricao.label": "Description",

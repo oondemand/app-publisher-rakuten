@@ -24,15 +24,12 @@
   "dialog.form.arquivo.label": "Arquivo",
   "dialog.form.arquivo.placeholder": "Selecione o arquivo",
 
-  "dialog.form.numero.label": "Número",
+  "dialog.form.numero.label": "Número do documento",
   "dialog.form.numero.placeholder": "Digite o número",
 
   "dialog.form.valor.label": "Valor",
 
-  "dialog.form.tipo.label": "Tipo",
-  "dialog.form.tipo.placeholder": "Selecione uma opção",
-
-  "dialog.form.competencia.label": "Competência",
+  "dialog.form.competencia.label": "Mês/ano de emissão",
   "dialog.form.descricao.label": "Descrição",
 
   "dialog.form.button.label": "Novo documento fiscal",

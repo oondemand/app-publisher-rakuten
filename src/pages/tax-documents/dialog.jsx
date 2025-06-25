@@ -41,9 +41,6 @@ const taxDocumentsSchema = z.object({
   numero: z
     .string()
     .nonempty({ message: "taxDocuments.validation.form.numero.required" }),
-  tipoDocumentoFiscal: z
-    .string()
-    .nonempty({ message: "taxDocuments.validation.form.tipo.required" }),
   valor: requiredCurrencyValidation({
     message: "taxDocuments.validation.form.valor.required",
   }),
@@ -76,7 +73,6 @@ export const TaxDocumentsDialog = () => {
     defaultValues: {
       file: null,
       numero: "",
-      tipoDocumentoFiscal: "",
       valor: "",
       descricao: "",
       competencia: "",
@@ -189,20 +185,6 @@ export const TaxDocumentsDialog = () => {
                 </div>
 
                 <div className="flex gap-2">
-                  <SelectInput
-                    required={true}
-                    control={form.control}
-                    name="tipoDocumentoFiscal"
-                    label={t("taxDocuments.dialog.form.tipo.label")}
-                    placeholder={t("taxDocuments.dialog.form.tipo.placeholder")}
-                    options={tiposDocumentoFiscal?.data?.valores?.map(
-                      (item) => ({
-                        value: item?.valor,
-                        label: (item?.chave ?? item?.valor).toUpperCase(),
-                      })
-                    )}
-                  />
-
                   <CompetenceInput
                     control={form.control}
                     name="competencia"
